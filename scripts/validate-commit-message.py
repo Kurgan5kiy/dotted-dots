@@ -7,12 +7,32 @@ import re
 import sys
 
 
+TRAILER_PATTERN = re.compile(r"^[A-Za-z0-9-]+:\s+.+$")
+
+
+def strip_trailers(message: str) -> str:
+    """Remove a terminal block of standard Git commit trailers."""
+    lines = message.strip().splitlines()
+    trailer_start = len(lines)
+
+    while trailer_start > 0 and TRAILER_PATTERN.match(lines[trailer_start - 1]):
+        trailer_start -= 1
+
+    if trailer_start == len(lines):
+        return message
+
+    while trailer_start > 0 and not lines[trailer_start - 1].strip():
+        trailer_start -= 1
+
+    return "\n".join(lines[:trailer_start])
+
+
 def fail(reason: str) -> None:
     print(f"Invalid commit message: {reason}", file=sys.stderr)
     raise SystemExit(1)
 
 
-message = " ".join(" ".join(sys.argv[1:]).split())
+message = " ".join(strip_trailers(" ".join(sys.argv[1:])).split())
 if not message:
     fail("the message is empty")
 
