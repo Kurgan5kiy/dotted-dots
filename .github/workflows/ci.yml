@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
 
       - name: Validate pull-request branch name
         if: github.event_name == 'pull_request'
@@ -45,10 +47,14 @@ jobs:
           bash -n scripts/configure-github.sh
           bash -n scripts/bootstrap-spec-kit.sh
           bash -n tests/test-cli.sh
+          bash -n tests/test-commit-message.sh
           python3 -m py_compile scripts/validate-commit-message.py
 
       - name: Test CLI contract
         run: tests/test-cli.sh
+
+      - name: Test commit-message validation
+        run: tests/test-commit-message.sh
 
       - name: Validate repository policy files
         run: |
