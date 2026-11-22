@@ -1,6 +1,6 @@
 # Validation Guide
 
-Draft protocol: the feature runtime and its commands do not exist yet.
+The development runtime and v1 commands exist on the implementation branch. The feature is not yet converged; use this guide to complete the outstanding acceptance work.
 
 ## Prerequisites
 
@@ -17,16 +17,16 @@ Once implemented, the following planned commands run from the repository root. `
 ```sh
 tests/test-cli.sh
 tests/test-commit-message.sh
-/usr/lib/qt6/bin/qmltestrunner -platform offscreen -input tests/qml
-rg --files src tests/qml -g '*.qml' -0 | xargs -0 -r /usr/lib/qt6/bin/qmlformat -i
-git diff --exit-code -- src tests/qml
-rg --files src -g '*.qml' -0 | xargs -0 -r /usr/lib/qt6/bin/qmllint
+scripts/check-qml.sh
+tests/test-package.sh
 qs -p src/shell.qml
 ```
 
-The formatter command is the CI formatting check and expects a clean, committed implementation checkout; during development review formatter changes before committing. Qt tool locations may differ by distribution. Unit tests must cover configuration, sink changes, lifecycle, dwell, pending-write confirmation and timers; offscreen tests do not replace compositor verification.
+The QML script compares formatter output without editing source, lints against installed Quickshell imports and runs software-rendered offscreen tests. Its narrowly documented metadata exceptions are reported in verification.md. Qt tool locations may differ by distribution. Offscreen tests do not replace compositor verification.
 
 After packaging with `scripts/package-release.sh v2026.1.0` in a test checkout, extract the archive to a temporary directory and run `qs -p` against its `share/quickshell/dot-shell/shell.qml`. Verify the installed CLI selects that configuration, and verify checksums and CLI status without modifying global installation paths.
+
+`tests/test-installed-runtime.sh` automates the live packaged-runtime lookup/status/state/show smoke check using a temporary named configuration with edge and external-change triggers disabled. It stops its own instance and sends no audio changes.
 
 ## End-to-end and visual checks
 

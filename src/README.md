@@ -1,7 +1,10 @@
 # Shell Source
 
-The Quickshell implementation will live here. `shell.qml` is intentionally not
-stubbed before the first Spec Kit implementation plan: the repository should
-not pretend that an unreviewed runtime architecture has already been chosen.
+`shell.qml` starts the first volume OSD runtime. Audio, configuration, platform
+input, IPC, lifecycle and visuals live in separate directories. The ordinary
+QtQuick `surfaces/volume/VolumeField.qml` can be rendered and tested independently
+of its Wayland `VolumeOsd.qml` window wrapper.
 
-Release packaging remains gated on the presence of `src/shell.qml`.
+Run with `qs -p src/shell.qml`. Development commands and configuration are
+documented in `docs/configuration.md`. The visual design remains under review;
+this is not yet a converged release.

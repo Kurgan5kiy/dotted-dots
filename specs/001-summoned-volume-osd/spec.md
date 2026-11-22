@@ -4,11 +4,11 @@
 
 **Created**: 2026-11-22
 
-**Status**: Draft — awaiting review
+**Status**: Reviewed and merged in PR #6; implementation authorized on `feature/06-volume-osd-runtime`.
 
 **Input**: The first feature prompt in `docs/spec-kit-bootstrap.md`, amended by the user's right-edge and backdrop direction.
 
-**Governance**: The draft constitution amendment to version 2.0.0 permits the feathered dark backdrop; the amendment requires review and a pull request under the constitution's governance rules.
+**Governance**: Constitution version 2.0.0 and the feature artifacts were reviewed through merged PR #6. The user confirmed the single-display edge experiment and authorized implementation; remaining display and visual acceptance work stays open.
 
 ## Clarifications
 
@@ -23,6 +23,9 @@
 - Q: How opaque should the dark backdrop be? → A: The center should be darker and may be fully opaque, fading softly to transparent edges, as in the supplied visual reference.
 - Q: Should there be a keyboard shortcut to show the OSD without changing volume? → A: Provide an optional configurable show action; leave it unbound by default.
 - Q: What should happen if reacting to external audio changes is delayed? → A: Try automatic reaction first; provide a binding-driven mode in which shell volume actions change audio and summon the OSD together, without automatic summoning from external audio changes.
+- Q: What visual changes are required after the first live preview? → A: Use a vertical volume chain aligned to the field dots. The line connects reached nodes only; the current-level dot is white and unreached nodes remain grey. Keep the right edge and softly bloom from it like light spreading across a wall, without a detached rectangular surface sliding into view.
+- Q: What refinement is required after the vertical preview? → A: Dots sit on the dark backdrop, strongest in the opaque center and fading toward its transparent edges, with none outside it. Reached grey nodes must not remain visible behind the line. The right-to-left bloom must be visibly slower, level changes smoothly animated, and the value typography light and Fira Code-like, with optional italic styling.
+- Q: How soft should the elliptical boundary be? → A: Use a broader transparency gradient so the outer region is more transparent; retain the dark center.
 
 ## User Scenarios & Testing
 
@@ -93,8 +96,12 @@ A user chooses placement, field appearance and timing, or reduced motion, and ca
 ### Functional Requirements
 
 - **FR-001**: The shell MUST observe the current default audio output's state for accurate display. Automatic summoning on external volume and mute changes MUST be configurable and enabled initially. If that trigger is too delayed, users MUST be able to disable it and use shell volume actions that summon the OSD as they request the audio change.
-- **FR-002**: The OSD MUST show a readable volume value, an interactive slider, and a minimal separate clickable mute dot. The dot MUST be white when unmuted and grey when muted and provide an additional non-colour distinction between states. Its appearance MUST reflect the confirmed output state.
+- **FR-002**: The OSD MUST show a readable volume value, a vertical interactive volume chain aligned to the field's dots, and a minimal separate clickable mute dot. The volume line MUST connect nodes only through the reached level, with the current-level dot white and unreached nodes grey. The separate mute dot MUST be white when unmuted and grey when muted and provide an additional non-colour distinction between states. All indicators MUST reflect confirmed output state.
 - **FR-003**: The OSD MUST present evenly spaced white dots over a local dark or dark-grey backdrop. The center may be fully opaque; both the dots and backdrop MUST fade gradually to transparency at the field boundaries, revealing underlying content without an outline or hard rectangular edge.
+
+At the selected screen edge, the conceptual field may extend beyond the visible display and be clipped there. Its visible backdrop must meet that edge and fade smoothly inward in an elongated, soft light-pool shape. The appearance must use a restrained bloom/fade rather than lateral translation of a detached card. The vertical chain's pointer control snaps to its node positions; volume keys and IPC retain their configured numeric step and the value label reports the actual confirmed percentage.
+
+Decorative field dots MUST sit on the dark backdrop, strongest over its opaque center and fading toward transparent edges; no decorative dots may remain where the backdrop is fully transparent. Reached chain dots MUST be hidden beneath the connected line, leaving a single white current-level endpoint and grey unreached nodes. Normal-motion appearance MUST visibly expand leftward from the right edge and level changes MUST interpolate smoothly between reached node positions, with stable pointer hit targets. Typography MUST use a configurable light monospaced family with a Fira Code preference and an optional italic setting.
 - **FR-004**: In normal motion, the field MUST emerge, trace a signal through selected dots, construct the controls, remain interactive, and retract toward its anchor before becoming fully invisible.
 - **FR-005**: The OSD MUST accept pointer slider adjustments after construction and reflect volume changes made with dedicated volume keys or configured shortcuts without requiring focus. Controls and hit targets MUST remain stationary while interactive.
 - **FR-006**: Automatic appearance and dismissal MUST NOT take keyboard focus from or disrupt the current application. No dedicated dismissal binding is required.
@@ -143,4 +150,4 @@ If an external tool sets volume above the shell's configured adjustment limit, t
 
 ## Constitution Check
 
-The slice retains the feathered field identity under draft constitution 2.0.0; embedded-wallpaper mode remains a future first-class feature. It preserves stable controls, keyboard actions, reduced motion and explicit failure behavior. Planning separates services, platform adapters, visuals, lifecycle, configuration and IPC, and requires nonvisual tests and reproducible visual evidence. The backdrop amendment still requires pull-request review. Input-region tradeoffs and live compositor support are recorded in the plan and must be verified before acceptance.
+The slice retains the feathered field identity under constitution 2.0.0, merged in PR #6; embedded-wallpaper mode remains a future first-class feature. It preserves stable controls, keyboard actions, reduced motion and explicit failure behavior. Planning separates services, platform adapters, visuals, lifecycle, configuration and IPC, and requires nonvisual tests and reproducible visual evidence. Input-region tradeoffs and live compositor support are recorded in the plan and must be verified before acceptance.

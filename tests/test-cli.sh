@@ -26,7 +26,10 @@ export XDG_DATA_HOME="$tmp_dir/data"
 export XDG_STATE_HOME="$tmp_dir/state"
 
 "$root_dir/bin/dot-shell" ipc call overlay show volume 42
-grep -Fx -- '-c dot-shell-test ipc call overlay show volume 42' "$calls_file" >/dev/null
+grep -Fx -- '-c dot-shell-test ipc call -- overlay show volume 42' "$calls_file" >/dev/null
+
+"$root_dir/bin/dot-shell" ipc call -- volume_v1 show
+grep -Fx -- '-c dot-shell-test ipc call -- volume_v1 show' "$calls_file" >/dev/null
 
 : > "$calls_file"
 "$root_dir/bin/dot-shell" status >/dev/null

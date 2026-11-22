@@ -4,6 +4,7 @@ dist/
 .cache/
 *.qmlc
 *.jsc
+.qmlls.ini
 *.log
 __pycache__/
 *.pyc

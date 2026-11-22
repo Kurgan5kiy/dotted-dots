@@ -2,7 +2,7 @@
 
 **Branch**: `feature/02-summoned-volume-osd` | **Date**: 2026-11-22 | **Spec**: [spec.md](spec.md)
 
-**Status**: Design draft completed for review. Product implementation remains gated by the pending constitution amendment review and the edge-input validation described below.
+**Status**: Artifacts and constitution merged in PR #6; user authorized implementation after the single-display diagnostic. Remaining display and visual validation is required before feature acceptance.
 
 ## Summary
 
@@ -24,14 +24,14 @@ Try automatic audio-change summoning first. Measure latency separately for exter
 
 Initial and post-design review against draft 2.0.0:
 
-- **I — Identity**: A feathered dark backdrop with a potentially opaque center complies with draft 2.0.0, but its amendment requires pull-request review; 1.0.0 remains the published baseline.
+- **I — Identity**: A feathered dark backdrop with a potentially opaque center complies with constitution 2.0.0, merged in PR #6.
 - **II — Access**: Pointer controls and externally bound volume/mute actions preserve focus. An optional show-only action can be bound by the user and defaults to unbound. Test hover, active, failure, reduced motion, scale and multiple outputs.
 - **III — Architecture**: Separate service, platform adapter, visuals, lifecycle and versioned IPC/configuration. No native code or extra dependency is approved.
 - **IV — Performance**: Use bounded visual regions and timers; collect reproducible latency, frame and idle observations.
 - **V — Slices**: Spec and plan are drafts, followed by checklist, tasks, analysis and implementation review.
 - **VI — Delivery**: Nonvisual tests, visual evidence, CI, convergence and honest disclosure are required.
 
-**Gate status**: Design review may proceed. Product implementation requires amendment review and an early, separately reviewed feasibility task demonstrating dwell, crossing between outputs and bounded input handling. Failure returns to the spec instead of silently reducing behavior. The narrow strip's input ownership is a documented design tradeoff requiring review.
+**Gate status**: The amendment and artifacts were merged in PR #6, and the user confirmed the initial single-display sensor diagnostic. Implementation may proceed under the user's explicit go-ahead. Crossing between outputs and scale validation remain acceptance obligations; they are not claimed complete by the local diagnostic. Failure returns to the spec instead of silently reducing behavior. The narrow strip's input ownership is a documented tradeoff.
 
 ## Project Structure
 
@@ -45,7 +45,7 @@ Boundaries: `src/shell.qml` for runtime; `src/services/AudioService.qml` for tra
 
 ## Rendering and interaction
 
-Render a bounded dark backdrop with a cached Canvas image, rebuilt only on geometry, scale or appearance changes. Use separable smooth falloff on all boundaries and an opaque center by default. Animate opacity and translation of the cached item, not Canvas repaint on every frame. Use bounded QML dot items and a path primitive independent of audio. Stop animation work when dormant and unload the visible surface; retain only sensors and service subscriptions.
+Render a bounded dark backdrop with a cached Canvas image, rebuilt only on geometry, scale or appearance changes. The reviewed visual revision uses an elongated elliptical falloff with its center at the physical right edge and its offscreen half clipped. Animate opacity and a restrained scale bloom of the cached item, without lateral surface translation or Canvas repaint on every frame. Use bounded QML dot items and a vertical path primitive independent of audio. Align the volume chain to one grid column: segments connect reached nodes, the current dot is white and unreached dots stay grey. Stop animation work when dormant and unload the visible surface; retain only sensors and service subscriptions.
 
 Use explicit lifecycle states and one active OSD. A repeated change updates confirmed state, resets idle and never reconstructs moving hit targets during a drag. Edge invocation always selects the entered display; a visible OSD stays on its current display during interaction. The mute dot uses grey plus a hollow center when muted, white and filled otherwise, with a minimum 32-logical-pixel invisible target.
 

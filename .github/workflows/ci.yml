@@ -49,6 +49,8 @@ jobs:
           bash -n scripts/bootstrap-spec-kit.sh
           bash -n tests/test-cli.sh
           bash -n tests/test-commit-message.sh
+          bash -n scripts/check-qml.sh
+          bash -n tests/test-package.sh
           python3 -m py_compile scripts/validate-commit-message.py
 
       - name: Test CLI contract
@@ -56,6 +58,9 @@ jobs:
 
       - name: Test commit-message validation
         run: tests/test-commit-message.sh
+
+      - name: Test release package contents and checksums
+        run: tests/test-package.sh
 
       - name: Validate repository policy files
         run: |
@@ -66,3 +71,21 @@ jobs:
           test -s docs/release-process.md
           grep -F 'GNU GENERAL PUBLIC LICENSE' LICENSE
           grep -F 'Version 3, 29 June 2007' LICENSE
+
+  qml:
+    name: qml
+    runs-on: ubuntu-latest
+    container: archlinux:base
+    steps:
+      - name: Install Quickshell and Qt test tools
+        run: pacman -Syu --needed --noconfirm quickshell qt6-declarative ripgrep git
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - name: Record tool versions
+        run: |
+          qs --version
+          /usr/lib/qt6/bin/qmllint --version
+      - name: Format, lint and test QML
+        run: scripts/check-qml.sh

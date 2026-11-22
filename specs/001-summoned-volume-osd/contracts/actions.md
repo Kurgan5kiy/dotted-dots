@@ -1,6 +1,6 @@
 # Volume Actions v1
 
-Proposed implementation contract; these commands do not exist yet. Existing CLI forwarding remains the public entry point. Register a typed Quickshell IPC target named `volume_v1`.
+Development v1 contract, implemented on the current feature branch and still subject to acceptance testing. Existing CLI forwarding is the public entry point; typed Quickshell IPC target `volume_v1` provides the actions below.
 
 | Invocation | Behavior |
 | --- | --- |
