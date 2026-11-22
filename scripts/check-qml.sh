@@ -39,5 +39,5 @@ while IFS= read -r -d '' qml_file; do
         fi
         printf 'Known Quickshell metadata diagnostics only: %s\n' "$qml_file"
     fi
-done < <(rg --files src tests/qml tests/visual -g '*.qml' -0)
+done < <(rg --files src tests/qml tests/visual tests/performance -g '*.qml' -0)
 QT_QUICK_BACKEND=software "$qt_bin/qmltestrunner" -platform offscreen -input tests/qml

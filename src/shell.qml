@@ -48,7 +48,6 @@ ShellRoot {
             pendingShow = true;
             console.warn("No usable output for volume OSD");
         }
-        console.debug("OSD request", osdController.phase, JSON.stringify(outputRouter.geometry));
     }
     VolumeActions {
         audio: soundService

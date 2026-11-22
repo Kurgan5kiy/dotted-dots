@@ -1,17 +1,17 @@
 # Implementation Checkpoint
 
-Branch: `feature/06-volume-osd-runtime`. Status: working development preview; visual acceptance and full convergence are pending.
+Branch: `feature/06-volume-osd-runtime`. Status: current-Niri visual and interaction preview accepted after refactoring; remaining verification, CI and full convergence are pending.
 
 ## Implemented and exercised
 
 - Versioned preferences, tracked PipeWire default-sink state, request accumulation/confirmation logic, typed `volume_v1` IPC and show-only invocation.
 - Per-output edge sensor, one bounded non-focus-taking overlay, explicit lifecycle, hover/drag timeout suspension, vertical node-snapping controls and separate mute indicator.
-- User review drove the vertical layout, grid-aligned reached line, slow right-to-left bloom, light Fira Code typography and broader backdrop/dot feathering. Final appearance is still being reviewed.
+- User review drove the vertical layout, grid-aligned reached line, pointer-following fluid field, bundled Allura typography and broader backdrop/dot feathering. The user accepted the appearance and subsequently accepted the refactored preview as complete for this stage.
 - The user reported working behavior during live single-display previews. Observed audio state updated through the real PipeWire integration; the automated interaction tests use simulated audio and do not mutate system sound.
 
 ## Automated verification
 
-- `scripts/check-qml.sh`: 37 passing Qt Quick Test results on Qt 6.12.0 using the software backend. Covers configuration validation, lifecycle timers and hover/drag, edge cancellation/rearm, audio request bounds/accumulation/confirmation, output selection/logical scales, node-snapping pointer controls, mute and four rendered backgrounds.
+- `scripts/check-qml.sh`: 64 passing Qt Quick Test results on Qt 6.12.0 using the software backend. Covers configuration validation, lifecycle timers and hover/drag, edge cancellation/rearm, audio request bounds/accumulation/confirmation, output selection/logical scales, node-snapping controls, animated values, pointer-follow/re-entry, sampler equivalence, transparent boundaries and four rendered backgrounds. Eight additional parity-test results cover before/after image comparisons; see [quality and performance](quality-and-performance.md).
 - QML formatting matches formatter output. Lint accepts only the documented Quickshell 0.3.2 metadata diagnostics: PanelWindow's runtime factory and VolumeOsd's opaque margins metadata. Other warnings, import errors and unexpected exit codes fail the check. These exceptions are not a claim of a warning-free upstream metadata set.
 - CLI forwarding and commit-message tests pass. IPC calls are explicitly delimited with `--` to avoid Quickshell treating the function name `show` as its own subcommand.
 - Package contents and SHA-256 tests pass. `tests/test-installed-runtime.sh` launched a temporary extracted package through its named config, checked CLI status/state/show, stopped it and removed its temporary files. Edge and automatic-audio triggers were disabled in that test; it sent no volume or mute changes.
@@ -22,7 +22,7 @@ Branch: `feature/06-volume-osd-runtime`. Status: working development preview; vi
 - Objective text and essential-control contrast on all backgrounds/states, particularly after widening the gradient; visual review is not a substitute for those measurements.
 - Full normal/reduced-motion capture matrix, end-to-end latency for 20 external and 20 binding-driven changes, actual audio-write failure/recovery and sink-switch integration tests.
 - Adjacent physical outputs, hotplug and fractional compositor scaling. Logical-size unit tests do not establish hardware compatibility.
-- Named-hardware frame/idle resource observations and complete structured edge/cancellation trials.
-- Remote QML CI and final user visual acceptance at this checkpoint.
+- Complete structured edge/cancellation trials. Named-hardware visual CPU/frame observations are now recorded in [quality and performance](quality-and-performance.md); these do not establish end-to-end latency or GPU presentation timing.
+- Remote QML CI and the remaining hardware/delivery acceptance work. Current single-display preview acceptance is recorded above.
 
 No claim of Converged is made. Open tasks and subsequent convergence findings remain required before review for merge or release.

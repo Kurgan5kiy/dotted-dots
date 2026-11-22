@@ -10,5 +10,7 @@ test -s "$test_dir/dot-shell/share/quickshell/dot-shell/shell.qml"
 test -s "$test_dir/dot-shell/share/quickshell/dot-shell/config/Validation.js"
 test -s "$test_dir/dot-shell/share/quickshell/dot-shell/services/AudioService.qml"
 test -s "$test_dir/dot-shell/share/quickshell/dot-shell/visual/FeatheredBackdrop.qml"
+test -s "$test_dir/dot-shell/share/quickshell/dot-shell/assets/fonts/allura/Allura-Regular.ttf"
+test -s "$test_dir/dot-shell/share/quickshell/dot-shell/assets/fonts/allura/OFL.txt"
 DOT_SHELL_INSTALL_ROOT="$test_dir/dot-shell" "$test_dir/dot-shell/bin/dot-shell" help >/dev/null
 printf 'Package content and checksum tests passed.\n'

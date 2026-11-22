@@ -7,7 +7,7 @@ User preferences live in `$XDG_CONFIG_HOME/dot-shell/config.json` (normally `~/.
 ```json
 {
   "schemaVersion": 1,
-  "edge": { "enabled": true, "dwellMs": 200 },
+  "edge": { "enabled": true, "dwellMs": 100 },
   "timing": { "idleMs": 2000 },
   "motion": { "reduced": false },
   "triggers": { "externalAudioChanges": true }
@@ -15,6 +15,13 @@ User preferences live in `$XDG_CONFIG_HOME/dot-shell/config.json` (normally `~/.
 ```
 
 The complete v1 keys, defaults, geometry rules and accepted ranges are in [the configuration contract](../specs/001-summoned-volume-osd/contracts/configuration.md). The edge sensor owns a configurable narrow input strip; disabling it removes that input region. A visible OSD owns input over its local field. It does not take keyboard focus.
+
+The current Niri 26.04 preview lets the dark patch follow your cursor slightly
+inside that fixed field. Leaving starts a shrinking fade with a short drift in
+the last outward direction; it cannot observe your actual cursor outside.
+Returning during retreat restores it. Keyboard-only appearances use the idle
+delay. Tune `motion.followRange` (36), `followMs` (120), `departureDrift` (32)
+and `departureScale` (0.3), or use reduced motion for a short stationary fade.
 
 The installed CLI supports these [versioned audio actions](../specs/001-summoned-volume-osd/contracts/actions.md):
 

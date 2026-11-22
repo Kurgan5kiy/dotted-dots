@@ -51,7 +51,9 @@ jobs:
           bash -n tests/test-commit-message.sh
           bash -n scripts/check-qml.sh
           bash -n tests/test-package.sh
+          bash -n tests/test-visual-parity.sh
           python3 -m py_compile scripts/validate-commit-message.py
+          python3 -m py_compile scripts/profile-osd.py
 
       - name: Test CLI contract
         run: tests/test-cli.sh
@@ -78,7 +80,7 @@ jobs:
     container: archlinux:base
     steps:
       - name: Install Quickshell and Qt test tools
-        run: pacman -Syu --needed --noconfirm quickshell qt6-declarative ripgrep git
+        run: pacman -Syu --needed --noconfirm quickshell qt6-declarative ripgrep git diffutils
       - name: Check out repository
         uses: actions/checkout@v7
         with:

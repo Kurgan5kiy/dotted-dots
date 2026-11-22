@@ -12,7 +12,10 @@ In a disposable test configuration, test a sensor at an outer edge and an edge s
 
 ## Automated checks
 
-Once implemented, the following planned commands run from the repository root. `tests/qml/` and feature source files will be created by implementation tasks. Point `QML_IMPORT_PATH` at the installed Quickshell QML modules; missing imports are a failure, not a reason to suppress lint warnings.
+Run these commands from the repository root. The feature source and QML tests
+are implemented. Point the check script at the installed Qt/Quickshell paths
+with `DOT_SHELL_QT_BIN` and `DOT_SHELL_QML_IMPORT` when needed; missing imports
+are a failure, not a reason to suppress lint warnings.
 
 ```sh
 tests/test-cli.sh

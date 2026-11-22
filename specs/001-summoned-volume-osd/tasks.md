@@ -59,6 +59,8 @@
 
 ## Dependencies and execution order
 
+- [x] T027 Implement and test the authorized Niri 26.04 local pointer-following preview: bounded follow, short departure drift, shrinking shared field alpha, stationary controls, immediate pointer retreat and re-entry recovery. Expose bounded motion preferences and retain reduced-motion behavior. Record reproducible synthetic evidence and launch for user review; exact outside tracking and final visual acceptance remain open.
+
 T001 and the confirmed single-display portion of T003 gate local implementation; the user authorized proceeding with the remaining hardware-dependent portion of T003 open as acceptance work. T004–T006 establish the foundation. US1 precedes US2 because its surface and service are reused; US3 extends those shared paths. Final delivery depends on all stories. Tests should expose absent behavior before the associated implementation and pass afterward. Review each increment and preserve existing user changes.
 
 ## Parallel opportunities
@@ -68,3 +70,16 @@ No `[P]` task is advertised as dependency-free; the small slice shares service a
 ## Implementation strategy
 
 First demonstrate US1 as the feedback MVP, then US2 audio controls, then US3 adaptation. US1 alone is an intermediate demonstration, not completion of this specification. All three stories, recorded verification and convergence are required before release.
+
+## Phase 7: Review refactoring and performance
+
+- [x] T028 Preserve the approved preview while separating field motion/illumination, volume-chain input and mute visuals; precompute shared gradient coefficients and test equivalence plus interaction/visual regressions (FR-003–005, FR-014, Constitution III–IV).
+- [x] T029 Add a bounded simulated-audio profiling probe, measure before/after normal and dense-grid motion plus settled/unloaded idle, record hardware, frame and CPU evidence with limits, and repair the missing QML CI tool dependency (plan: verification, Constitution IV–VI). Prepare the resulting preview for user retest without merging.
+
+## Phase 8: Convergence
+
+- [ ] T030 Resolve the accepted theme's bright-background contrast mismatch through an explicit product decision, then capture and measure text and essential-indicator contrast on all four fixtures in normal, hovered, active and unavailable states; preserve the feathered boundary and record exact outcomes per SC-004 and FR-010 (contradicts).
+- [ ] T031 Record reproducible 20-trial external/direct audio response and disabled-trigger results plus 20 edge dwell and cancellation trials, measuring from initiating command startup through first visible response; retain unverified results as open per SC-001–002, SC-007 and T013/T018/T025 (missing).
+- [ ] T032 Complete adjacent-output, output-loss and two-scale compositor validation on an eligible setup; distinguish synthetic routing tests from live display evidence and leave unavailable hardware coverage open per SC-006, FR-012 and T003/T022 (partial).
+- [ ] T033 Exercise actual audio-service pending confirmation timeout, stale-sink cancellation, unavailable state and recovery with an isolated or injectable backend; preserve real user audio and record the boundary between unit coverage and live integration per FR-013, FR-019 and T007/T015 (partial).
+- [ ] T034 Reconcile current implementation/status/acceptance documentation, publish only original synthetic visual evidence, update the feature PR and verify remote QML/validation checks before delivery per plan verification, Constitution VI and T023 (partial).

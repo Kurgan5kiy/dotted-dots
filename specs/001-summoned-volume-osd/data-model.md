@@ -10,9 +10,10 @@ Canonical field names below apply to implementation and task citations; QML prop
 | `AudioOutput.muted` | Confirmed Boolean, null when unavailable; distinct from zero volume. |
 | `AudioOutput.pending` | Null or latest requested volume/mute state, sink identity and 1000 ms deadline. Accept volume confirmation within 0.5 percentage points; mute must match exactly. Expiry reports failure; output change cancels the request. |
 | `Preferences.values` | Validated configuration object; every key, default, range and relationship is defined in contracts/configuration.md. Invalid fields use documented defaults with a diagnostic. |
-| `Osd.phase` | One of dormant, emerging, tracing, constructing, interactive, retracting. Reduced motion substitutes fades. New events during retraction restore the same visible instance; do not duplicate it. |
-| `Interaction.hovered` | Boolean; pointer over local OSD field pauses idle dismissal. Leaving starts a fresh idle interval unless dragging. |
+| `Osd.phase` | One of dormant, emerging, interactive, retracting. The confirmed state is initialized during emergence; there is no post-appearance fill stage. Reduced motion substitutes short fades. New events during retraction restore the same visible instance; do not duplicate it. |
+| `Interaction.hovered` | Boolean; pointer over the fixed local OSD field pauses idle dismissal. Leaving starts retreat unless dragging; returning during retreat restores interaction. |
 | `Interaction.dragging` | Boolean; active drag pauses timeout and fixes control placement until release or output loss. |
+| `Interaction.pointerLight` | Bounded local follow offsets, last in-surface pointer position and outward delta. Niri 26.04 preview continues only a finite exit-direction drift, with no claimed outside coordinates; shared transformed field alpha controls local illumination. Reduced motion disables travel and shrink. |
 | `Interaction.edgeState` | One of armed, dwelling, latched. Enter begins dwell, leave cancels dwell/rearms, expiry summons and latches. After dismissal while still at the edge, remain latched until leave. Disabled sensors cannot trigger. |
 | `OutputSelection.screenId` | Selected connected output identity or null. Edge invocation selects its output; automatic/show invocation uses configured output or first available fallback unless interaction has fixed placement. Recompute on output loss and scale changes. |
 

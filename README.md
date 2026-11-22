@@ -27,9 +27,10 @@ Dot Shell has two visual modes:
 
 ## Status
 
-**Pre-alpha / specification phase.** The repository currently contains the
-product definition, agent workflow, release plumbing, installer, and CLI
-contract. Shell implementation begins with the first reviewed Spec Kit feature.
+**Pre-alpha / implementation validation.** The first summoned volume OSD is
+implemented with right-edge activation, a fluid dot field, volume and mute
+controls, configurable motion, and versioned CLI/IPC actions. Its reviewed
+preview is undergoing final verification; no release is available yet.
 
 ## Planned surfaces
 
@@ -103,3 +104,6 @@ for branch names, release fixes, and quality gates.
 ## License
 
 GPL-3.0-only. See [LICENSE](LICENSE).
+
+The bundled Allura typeface is independently licensed under SIL OFL-1.1;
+see its [license and provenance](src/assets/fonts/allura/README.md).

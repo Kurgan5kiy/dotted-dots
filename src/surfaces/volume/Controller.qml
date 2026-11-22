@@ -22,10 +22,19 @@ QtObject {
         else
             refreshIdle();
     }
-    onHoveredChanged: refreshIdle()
-    onDraggingChanged: refreshIdle()
+    onHoveredChanged: {
+        if (hovered && phase === "retracting")
+            show();
+        else if (!hovered && !dragging && (phase === "interactive" || phase === "emerging"))
+            phase = "retracting";
+        refreshIdle();
+    }
+    onDraggingChanged: {
+        if (!dragging && !hovered && phase === "interactive")
+            phase = "retracting";
+        refreshIdle();
+    }
     onPhaseChanged: {
-        console.debug("OSD phase", phase, Date.now());
         stage.stop();
         if (phase === "dormant") {
             hovered = false;
