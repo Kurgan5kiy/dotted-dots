@@ -18,8 +18,10 @@ functional interface, and disappears when the interaction is complete.
 
 This mode works with any wallpaper. A local matrix appears from nowhere around
 an anchor such as the cursor, a screen edge, or a focused object. It has no
-border, container fill, or hard rectangular edge. Dot opacity is strongest in
-the useful area and continuously feathers to zero toward every boundary.
+border or hard rectangular edge. Dot opacity is strongest in the useful area
+and continuously feathers to zero toward every boundary. A dark backdrop may
+support contrast, with a center that can be opaque and edges that feather to
+zero, revealing the wallpaper or windows behind it.
 
 ### Embedded field
 

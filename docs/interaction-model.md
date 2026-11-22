@@ -40,7 +40,9 @@ the wallpaper look like it has two slightly misaligned grids.
 
 - Stable click targets must not move after construction.
 - Every action must be keyboard reachable.
-- Escape dismisses the active transient surface.
+- Escape dismisses a transient surface when it owns keyboard focus. Passive
+  overlays that do not take focus may instead dismiss automatically without a
+  dedicated binding, as specified by their feature.
 - Focus returns to the invoking context after dismissal.
 - Timeouts pause while the user is interacting.
 - Reduced motion replaces traversal with restrained fades or short transitions.

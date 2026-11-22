@@ -9,6 +9,12 @@
 - GitHub Spec Kit (`specify-cli`)
 - Quickshell and Niri when implementation begins
 
+The summoned-volume-OSD feature initially validates Quickshell 0.3.2 with Qt
+6.12 and Niri 26.04. Earlier 0.3.1 API research does not imply tested support
+for that version. On Arch-based systems, install with
+`sudo pacman -S --needed quickshell` and verify with `qs --version`.
+Qt's formatter, linter and test runner may be under `/usr/lib/qt6/bin`.
+
 Install and verify Spec Kit:
 
 ```sh
