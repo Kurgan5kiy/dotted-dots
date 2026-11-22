@@ -48,7 +48,7 @@
 - [x] T019 [US3] Add output-loss, fit and scale routing tests in `tests/qml/tst_outputs.qml` using data-model.md `OutputSelection.screenId` (FR-012).
 - [x] T020 [US3] Complete output routing and geometry fitting in `src/platform/OutputRouter.qml` and reduced-motion branches in `src/surfaces/volume/VolumeOsd.qml` following data-model.md `Preferences.values`, `OutputSelection.screenId` and `Osd.phase` (FR-009, FR-011–012).
 - [x] T021 [US3] Supply reproducible licensed/generated bright, dark, colorful and busy fixtures in `tests/visual/` with provenance and a capture guide in `tests/visual/README.md`; exclude private reference artwork (FR-010).
-- [ ] T022 [US3] Record normal/reduced motion, opaque center and feathered edges, open-window stacking, mute distinction, output removal and mixed-scale evidence in `specs/001-summoned-volume-osd/evidence/visual.md`; measure text/control contrast in normal, hover, active and unavailable states per SC-004 (SC-004–006).
+- [ ] T022 [US3] Record normal/reduced motion, opaque center and feathered edges, open-window stacking, mute distinction, output removal and mixed-scale evidence in `specs/001-summoned-volume-osd/evidence/visual.md`; compare normal, hover, active and unavailable states with the approved design and document contrast limits under revised SC-004 (SC-004–006).
 
 ## Phase 6: Integration and delivery
 
@@ -78,7 +78,7 @@ First demonstrate US1 as the feedback MVP, then US2 audio controls, then US3 ada
 
 ## Phase 8: Convergence
 
-- [ ] T030 Resolve the accepted theme's bright-background contrast mismatch through an explicit product decision, then capture and measure text and essential-indicator contrast on all four fixtures in normal, hovered, active and unavailable states; preserve the feathered boundary and record exact outcomes per SC-004 and FR-010 (contradicts).
+- [x] T030 Resolve the visual design/spec contradiction through the user's explicit direction to adopt the accepted implementation; update FR-004, FR-010, SC-004 and dependent design/verification documents, retain measured contrast limits, and preserve the current appearance. The former fixed-ratio gate is superseded; full visual-state coverage remains in T022 (contradicts, resolved by approved spec revision).
 - [ ] T031 Record reproducible 20-trial external/direct audio response and disabled-trigger results plus 20 edge dwell and cancellation trials, measuring from initiating command startup through first visible response; retain unverified results as open per SC-001–002, SC-007 and T013/T018/T025 (missing).
 - [ ] T032 Complete adjacent-output, output-loss and two-scale compositor validation on an eligible setup; distinguish synthetic routing tests from live display evidence and leave unavailable hardware coverage open per SC-006, FR-012 and T003/T022 (partial).
 - [x] T033 Exercise actual audio-service pending confirmation timeout, stale-sink cancellation, unavailable state and recovery with an isolated or injectable backend; preserve real user audio and record the boundary between unit coverage and live integration per FR-013, FR-019 and T007/T015 (partial).

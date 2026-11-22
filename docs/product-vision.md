@@ -23,6 +23,15 @@ and continuously feathers to zero toward every boundary. A dark backdrop may
 support contrast, with a center that can be opaque and edges that feather to
 zero, revealing the wallpaper or windows behind it.
 
+The first volume OSD establishes the accepted summoned-field visual pattern:
+a softly moving dark light pool with its gradient attached, a white dot grid
+whose opacity follows that illumination, and minimal stationary controls.
+Nearby pointer movement nudges the pool; departure shrinks and fades it,
+partially extinguishing controls as illumination moves away. Handwritten
+values and small solid status dots complement the dot-and-line composition.
+Future summoned surfaces should follow this visual language while specifying
+their own behavior; this does not add a surface to the active feature.
+
 ### Embedded field
 
 This mode works with compatible dotted wallpapers. The shell aligns active

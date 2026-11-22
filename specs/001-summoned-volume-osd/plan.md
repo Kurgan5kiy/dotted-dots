@@ -2,7 +2,7 @@
 
 **Branch**: `feature/02-summoned-volume-osd` | **Date**: 2026-11-22 | **Spec**: [spec.md](spec.md)
 
-**Status**: Artifacts and constitution merged in PR #6; implementation and the refactored current-Niri preview are accepted. Convergence has returned outstanding contrast, structured integration and display-verification work to tasks.md.
+**Status**: Artifacts and constitution merged in PR #6; the current-Niri implementation and refactored preview are accepted. The user directed the spec to adopt this visual pattern, superseding the earlier fixed-ratio contrast gate. Structured integration, visual-state evidence and display verification remain tracked in tasks.md.
 
 ## Summary
 
@@ -92,6 +92,18 @@ Run existing CI plus deterministic QML tests for state, configuration, dwell, ou
 The reviewed feature is implemented. Continue verification and convergence
 against tasks.md; unresolved criteria remain explicit and block claiming full
 convergence or delivery readiness.
+
+For T031's timing/cancellation verification, run the installed Niri binary as
+a nested compositor with temporary configuration, runtime directory and D-Bus
+session, never `--session`. Connect a minimal test-only virtual-pointer client
+only to that private Wayland socket. Use private PipeWire null sinks and an
+instrumented copy of the real shell; keep production motion timings intact.
+Measure elapsed time from audio-command process creation to a changed capture
+of the compositor's synthetic white test surface, including startup/IPC and
+capture delay. Run 20 trials per audio mode and 20 edge dwell/cancellation
+trials. Record raw samples, observable pixel threshold, motion evidence and
+the limits of nested-backend/composited-pixel measurements. This adds no
+production dependency and does not change host audio or pointer position.
 
 ## Complexity Tracking
 

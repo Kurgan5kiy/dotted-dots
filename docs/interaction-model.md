@@ -12,6 +12,12 @@ All transient surfaces follow the same conceptual sequence:
 6. **Retract** — the surface collapses toward its anchor.
 7. **Dormant** — temporary nodes reach zero opacity or wallpaper nodes sleep.
 
+These phases may overlap where a feature specifies it. The accepted volume
+OSD reveals its initialized value and line during emergence; it does not fill
+from zero afterward. Later volume changes animate the reached line. Its
+pointer-driven retreat follows departure while shrinking and fading, whereas
+keyboard-only dismissal retreats toward its edge anchor.
+
 ## Summoned field
 
 The field may originate from the cursor, bar, focused window, keyboard-invoked

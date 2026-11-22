@@ -16,6 +16,50 @@ The bounded local pointer follow and finite departure drift are accepted for
 this stage; they do not provide exact outside-surface tracking. Remaining
 hardware verification, CI and convergence are still required for delivery.
 
+**Design authority**: The user requested updating this spec to follow the
+accepted implementation's visual pattern. The design below supersedes earlier
+preview directions where they conflict. Preserve this appearance during
+verification; do not redesign it to meet obsolete visual or contrast targets.
+
+## Approved Visual Design
+
+The summoned surface is a moving pool of dark illumination at the right screen
+edge, with a dark or dark-grey center and a broad feather into full
+transparency. Its gradient moves with the dark mass. It has no visible
+rectangular container, outline or clipped straight boundary inside the screen.
+Small fluid changes make the field feel alive; the motion settles rather than
+running indefinitely.
+
+Evenly spaced white dots sit on the dark field. They are strongest near the
+opaque region and fade with its illumination; no dots remain over a fully
+transparent region. The volume chain forms one vertical column in that grid.
+Its reached section is a thin white line, its moving endpoint is white, and
+unreached chain dots are subtly brighter than the decorative dots. Reached
+grey dots do not show through the line. Opening reveals the actual level
+together with the field, without an extra fill from zero.
+
+The percentage uses light, handwritten calligraphic numerals. Value changes
+slide and crossfade smoothly. Mute is a separate solid dot: white and slightly
+larger when unmuted, grey and smaller when muted. Controls remain minimalistic;
+their hit areas stay fixed while the field moves.
+
+The field emerges from right to left and gently follows nearby pointer
+movement over a small range. Local illumination determines which parts of the
+stationary controls remain visible. Leaving starts a shrinking, fading retreat
+in the departure direction; returning reverses retreat smoothly. On the current
+Niri baseline, the outside portion is a short finite continuation of the last
+outward direction, not exact global pointer tracking. Keyboard-only appearance
+uses the idle delay and an edge-directed retreat. Reduced motion uses short
+stationary fades and direct value updates.
+
+The existing generated fixture captures and user-reviewed live preview define
+the visual baseline. Contrast measurements are diagnostic: the approved
+low-contrast feathering is intentionally preserved. Do not add a shadow,
+backing panel or larger opaque footprint merely to achieve the former fixed
+contrast ratios. Document visibility limits on very bright content; do not
+claim a certified high-contrast theme. A separate high-contrast preset requires
+its own product decision and is not added by this revision.
+
 ## Clarifications
 
 ### Session 2026-11-22
@@ -109,21 +153,21 @@ A user chooses placement, field appearance and timing, or reduced motion, and ca
 - **FR-002**: The OSD MUST show a readable volume value, a vertical interactive volume chain aligned to the field's dots, and a minimal separate clickable mute dot. The volume line MUST connect nodes only through the reached level, with the current-level dot white and unreached nodes grey. The separate mute dot MUST be white when unmuted and grey when muted and provide an additional non-colour distinction between states. All indicators MUST reflect confirmed output state.
 - **FR-003**: The OSD MUST present evenly spaced white dots over a local dark or dark-grey backdrop. The center may be fully opaque; both the dots and backdrop MUST fade gradually to transparency at the field boundaries, revealing underlying content without an outline or hard rectangular edge.
 
-At the selected screen edge, the conceptual field may extend beyond the visible display and be clipped there. Its visible backdrop must meet that edge and fade smoothly inward in an elongated, soft light-pool shape. The appearance must use a restrained bloom/fade rather than lateral translation of a detached card. The vertical chain's pointer control snaps to its node positions; volume keys and IPC retain their configured numeric step and the value label reports the actual confirmed percentage.
+At the selected screen edge, the conceptual field may extend beyond the visible display and be clipped there. Its visible backdrop must meet that edge and fade smoothly inward in an elongated, soft light-pool shape. The dark field and attached gradient must move inward together without becoming a detached card. The vertical chain's pointer control snaps to its node positions; volume keys and IPC retain their configured numeric step and the value label reports the actual confirmed percentage.
 
-Decorative field dots MUST sit on the dark backdrop, strongest over its opaque center and fading toward transparent edges; no decorative dots may remain where the backdrop is fully transparent. Reached chain dots MUST be hidden beneath the connected line, leaving a single white current-level endpoint and grey unreached nodes. Appearance MUST resemble a light source approaching the screen edge rather than lateral widget stretching. Level changes MUST interpolate smoothly with fixed hit targets. Numerals MUST move during changes in normal motion and use configurable light calligraphic typography; reduced motion replaces numeral travel with direct updates.
+Decorative field dots MUST sit on the dark backdrop, strongest over its opaque center and fading toward transparent edges; no decorative dots may remain where the backdrop is fully transparent. Reached chain dots MUST be hidden beneath the connected line, leaving a single white current-level endpoint and grey unreached nodes. Appearance MUST move the light pool from right to left with gentle fluid deformation. Level changes MUST interpolate smoothly with fixed hit targets. Numerals MUST move during changes in normal motion and use configurable light calligraphic typography; reduced motion replaces numeral travel with direct updates.
 
 Unreached volume-chain dots MUST be subtly brighter than the decorative field
 dots, making the line's potential upward path apparent while remaining dimmer
 than the white current-level endpoint. They retain the moving field's local
 illumination and disappear as the line reaches them.
-- **FR-004**: The field and current volume state MUST emerge together through a soft proximity-like illumination effect, remain interactive, and recede through the reverse effect before becoming fully invisible. Appearance MUST NOT be followed by a separate fill from zero. Grey nodes MUST follow the moving endpoint in both directions without early hiding or delayed return, including rapid decreases.
+- **FR-004**: The dark field, its attached gradient and current volume state MUST emerge together from right to left, with bounded fluid motion and gentle local pointer following. On pointer departure, the field MUST drift a short distance in the last outward direction, shrink and fade while locally extinguishing stationary controls. Keyboard-only dismissal MUST retreat toward the edge. Appearance MUST NOT be followed by a separate fill from zero. Grey nodes MUST follow the moving endpoint in both directions without early hiding or delayed return, including rapid decreases.
 - **FR-005**: The OSD MUST accept pointer slider adjustments after construction and reflect volume changes made with dedicated volume keys or configured shortcuts without requiring focus. Controls and hit targets MUST remain stationary while interactive.
 - **FR-006**: Automatic appearance and dismissal MUST NOT take keyboard focus from or disrupt the current application. No dedicated dismissal binding is required.
 - **FR-007**: The OSD MUST dismiss after a configurable idle timeout when summoned without pointer interaction, pause that timeout during interaction or while the pointer is over the OSD, and restart it on a new volume or mute change. Pointer departure starts the shrinking/fading retreat immediately after any active drag finishes. Re-entry during retreat restores the field without moving its fixed hit targets.
 - **FR-008**: Changes arriving while the OSD is visible or retracting MUST update one OSD to the latest state without duplicating it or interrupting an active drag.
 - **FR-009**: Reduced motion MUST replace traversal and retraction movement with restrained fades or short transitions while retaining all information and interactions.
-- **FR-010**: The value, mute indication and slider MUST remain legible and distinguishable over bright, dark, colorful and visually busy wallpapers without a hard-edged panel.
+- **FR-010**: The OSD MUST preserve the approved moving-illumination design and recognizable value, mute and slider states across representative backgrounds, without a hard-edged panel. Controls MUST follow local illumination, including intentional partial fading during movement and retreat. Review and document visibility limits over bright content; do not replace the accepted theme merely to enforce a fixed contrast ratio.
 - **FR-011**: Users MUST be able to configure dot spacing and radius, field size, feathering, animation timings, idle timeout and screen placement; invalid values MUST use documented safe defaults.
 - **FR-012**: The OSD MUST stay within the selected display's usable area and remain usable across supported scale factors and display changes.
 - **FR-013**: The OSD MUST indicate unavailable audio state or failed adjustments without presenting an unconfirmed value as successful, and recover when the output becomes available.
@@ -148,7 +192,7 @@ If an external tool sets volume above the shell's configured adjustment limit, t
 - **SC-001**: With automatic audio-change summoning enabled, in a reproducible test of 20 volume or mute changes, the OSD displays the confirmed latest state for all 20, with no duplicate OSDs. In binding-driven mode, 20 accepted shell audio actions summon it directly, while 20 external changes do not open a dormant OSD.
 - **SC-002**: Measure two separate sets of 20 trials: external audio changes with automatic summoning enabled, and shell audio actions with it disabled. Each trial MUST produce a first visible response within 500 ms, measured from the initiating audio-command process invocation, including command startup and IPC time. Record the environment and timing method. This measures presentation latency, not audio-write confirmation; the OSD may initially show the previous confirmed value while a write is pending.
 - **SC-003**: In tests using both pointer and keyboard, users can increase and decrease volume and toggle and identify mute state; the OSD dismisses automatically after the idle timeout, and mute states remain distinguishable without relying on colour alone.
-- **SC-004**: Across at least four representative backgrounds (bright, dark, colorful and busy), including an open window, the volume text MUST reach a contrast ratio of at least 4.5:1 against its composited local background and essential control indicators at least 3:1. Measure normal, hovered, active and unavailable states at the default theme; the muted dot must also retain its non-colour distinction. Record the measurement method and visual evidence that the backdrop fades into underlying content without a hard boundary. Custom appearance combinations that miss these targets must be documented as outside the verified accessible preset.
+- **SC-004**: Review the approved visual pattern over four representative backgrounds (bright, dark, colorful and busy) and an open window, covering normal, hovered, active and unavailable states. Captures and regressions MUST show a borderless moving field, decorative dots fading with its backdrop, a vertical reached line without grey-dot overlap, an immediately initialized level, handwritten animated values and a size/colour-distinct mute dot. Non-screen boundaries MUST reach full transparency even at the configured pointer-follow extremes. Document measured contrast and visibility limits as diagnostics; the former 4.5:1 text and 3:1 indicator ratios are not acceptance gates for this approved theme. Preserve the reviewed appearance without automatically adding halos, cards or extra opaque backing. This does not claim high-contrast accessibility certification.
 - **SC-005**: With reduced motion enabled, all appearance and dismissal trials avoid signal traversal and moving retraction while retaining the same controls and state.
 - **SC-006**: In a multi-display test including at least two scale factors, the OSD remains within the selected display and usable in every tested configuration.
 - **SC-007**: In 20 right-edge dwell trials, the OSD appears on the display whose edge was reached, above any open window; normal-motion recordings show emergence from right to left in each trial. In 20 trials leaving the edge before the configured dwell expires, the edge trigger does not summon it.
