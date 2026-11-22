@@ -74,6 +74,11 @@ Write commit messages as one to three complete sentences. Every sentence starts
 with a capital letter and ends with a period. Do not use Conventional Commit
 prefixes such as `feat:`, `fix:`, or `chore:`.
 
+Validation excludes standard trailing Git trailers and GitHub's `(#123)` suffix
+at the end of a squash commit subject. The authored text must still follow the
+sentence rules; GitHub's generated bullet-point description should be replaced
+with sentence-style prose or left empty.
+
 ```text
 Add the summoned dot-field foundation.
 Preserve field placement when an output reconnects.

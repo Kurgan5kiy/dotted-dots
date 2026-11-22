@@ -32,7 +32,11 @@ def fail(reason: str) -> None:
     raise SystemExit(1)
 
 
-message = " ".join(strip_trailers(" ".join(sys.argv[1:])).split())
+lines = strip_trailers(" ".join(sys.argv[1:])).strip().splitlines()
+if lines:
+    # GitHub appends a pull-request reference to squash commit subjects.
+    lines[0] = re.sub(r"\s+\(#[0-9]+\)$", "", lines[0])
+message = " ".join("\n".join(lines).split())
 if not message:
     fail("the message is empty")
 
