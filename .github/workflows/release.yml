@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v[0-9]*.[0-9]*.[0-9]*"
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out tagged source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify tag belongs to a release branch
+        run: |
+          git fetch origin '+refs/heads/release/*:refs/remotes/origin/release/*'
+          git branch -r --contains "${GITHUB_SHA}" | \
+            grep -Eq 'origin/release/[0-9]{4}\.[1-9][0-9]*$'
+
+      - name: Validate scripts
+        run: |
+          bash -n install.sh
+          bash -n bin/dot-shell
+          tests/test-cli.sh
+
+      - name: Build release package
+        run: scripts/package-release.sh "${GITHUB_REF_NAME}"
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            dist/dot-shell-linux.tar.gz \
+            dist/SHA256SUMS \
+            --verify-tag \
+            --generate-notes \
+            --title "Dot Shell ${GITHUB_REF_NAME#v}"

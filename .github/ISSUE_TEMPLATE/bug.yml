@@ -1,0 +1,41 @@
+name: Bug report
+description: Report reproducible incorrect behavior in Dot Shell
+title: "fix: "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Observed behavior
+      description: What happened, and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction
+      description: Provide minimal, ordered steps.
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Dot Shell version or commit
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Niri, Quickshell, and distribution versions
+    validations:
+      required: true
+  - type: textarea
+    id: outputs
+    attributes:
+      label: Output layout and scaling
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs and visual evidence
+      description: Remove secrets and private data before attaching logs.

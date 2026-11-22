@@ -1,0 +1,29 @@
+# Build and generated output
+build/
+dist/
+.cache/
+*.qmlc
+*.jsc
+*.log
+
+# Environments and editors
+.env
+.env.*
+!.env.example
+.direnv/
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Nix output
+result
+result-*
+
+# Spec Kit machine-local state
+.specify/feature.json
+.specify/extensions/*/local-config.yml
+
+# Private, copyrighted, or license-unclear visual references
+assets/references/private/

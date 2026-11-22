@@ -1,0 +1,36 @@
+name: Feature proposal
+description: Propose a bounded user-facing capability
+title: "feature: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What user need or limitation should this address?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: Describe behavior rather than implementation.
+    validations:
+      required: true
+  - type: dropdown
+    id: dot_mode
+    attributes:
+      label: Relevant dot mode
+      options:
+        - Summoned field
+        - Embedded field
+        - Both
+        - Neither / infrastructure
+    validations:
+      required: true
+  - type: textarea
+    id: exclusions
+    attributes:
+      label: Non-goals
+      description: What should remain outside this proposal?

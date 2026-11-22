@@ -1,0 +1,67 @@
+# Development Guide
+
+## Prerequisites
+
+- Git
+- Python 3.11 or newer
+- `uv`
+- Codex CLI
+- GitHub Spec Kit (`specify-cli`)
+- Quickshell and Niri when implementation begins
+
+Install and verify Spec Kit:
+
+```sh
+uv tool install specify-cli
+specify version
+specify self check
+```
+
+Initialize Codex integration from the repository root:
+
+```sh
+./scripts/bootstrap-spec-kit.sh
+```
+
+The committed constitution is preserved by Spec Kit initialization. The script
+installs `specify-cli` with `uv` if it is not already available, then installs
+the Codex integration in place.
+
+Codex skills are installed under `.agents/skills/` and invoked with a dollar
+prefix, for example `$speckit-specify`.
+
+## Constitution prompt
+
+Run `$speckit-constitution` once with the principles in
+`docs/spec-kit-bootstrap.md`, review the resulting constitution, and commit it.
+
+## Per-feature flow
+
+For production features:
+
+```text
+$speckit-specify
+$speckit-clarify
+$speckit-plan
+$speckit-checklist
+$speckit-tasks
+$speckit-analyze
+$speckit-implement
+$speckit-converge
+```
+
+Invoke and review each stage separately. Do not paste the whole sequence as one
+request. Commit reviewable artifact milestones.
+
+## Suggested feature sequence
+
+1. Quickshell/Niri runtime bootstrap
+2. Summoned dot-field primitive
+3. Feathering and adaptive contrast
+4. Path/node animation engine
+5. Volume OSD vertical slice
+6. Compatible-wallpaper metadata
+7. Embedded-lattice renderer
+8. Bar foundation and module contract
+9. Workspace integration
+10. Launcher, notifications, settings, widgets, and lock surface as separate specs

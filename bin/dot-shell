@@ -1,0 +1,138 @@
+#!/usr/bin/env sh
+set -eu
+
+PROGRAM="dot-shell"
+CONFIG_NAME="${DOT_SHELL_CONFIG_NAME:-dot-shell}"
+REPOSITORY="${DOT_SHELL_REPOSITORY:-Kurgan5kiy/dotted-dots}"
+INSTALL_URL="https://raw.githubusercontent.com/${REPOSITORY}/main/install.sh"
+
+data_home=${XDG_DATA_HOME:-"$HOME/.local/share"}
+state_home=${XDG_STATE_HOME:-"$HOME/.local/state"}
+install_root="${DOT_SHELL_INSTALL_ROOT:-$data_home/dot-shell}"
+version_file="$install_root/current/VERSION"
+log_dir="$state_home/dot-shell"
+
+die() {
+  printf '%s: %s\n' "$PROGRAM" "$*" >&2
+  exit 1
+}
+
+need_qs() {
+  command -v qs >/dev/null 2>&1 || die "Quickshell's 'qs' command is not installed"
+}
+
+usage() {
+  cat <<'EOF'
+Usage: dot-shell <command> [arguments]
+
+Lifecycle:
+  start                 Start the Dot Shell Quickshell configuration
+  stop                  Stop the running Dot Shell instance
+  restart               Stop, then start Dot Shell
+  status                Check whether Dot Shell answers IPC
+
+IPC:
+  ipc show              List registered IPC targets
+  ipc call TARGET FN... Call a registered IPC function
+  ipc prop ...          Forward property commands to Quickshell
+  ipc wait|listen ...   Wait for or listen to IPC signals
+
+Maintenance:
+  update                Run the verified-release installer
+  version               Print the installed Dot Shell version
+  help                  Show this help
+
+Environment:
+  DOT_SHELL_CONFIG_NAME Override the Quickshell configuration name
+  DOT_SHELL_REPOSITORY  Override the GitHub owner/repository
+  DOT_SHELL_INSTALL_ROOT Override the installation root
+EOF
+}
+
+start_shell() {
+  need_qs
+  mkdir -p "$log_dir"
+
+  if qs -c "$CONFIG_NAME" ipc show >/dev/null 2>&1; then
+    printf 'Dot Shell is already running.\n'
+    return 0
+  fi
+
+  nohup qs -c "$CONFIG_NAME" >"$log_dir/quickshell.log" 2>&1 &
+  printf 'Dot Shell started; log: %s\n' "$log_dir/quickshell.log"
+}
+
+stop_shell() {
+  need_qs
+  if qs -c "$CONFIG_NAME" kill >/dev/null 2>&1; then
+    printf 'Dot Shell stopped.\n'
+  else
+    die "Dot Shell is not running or could not be stopped"
+  fi
+}
+
+status_shell() {
+  need_qs
+  if qs -c "$CONFIG_NAME" ipc show >/dev/null 2>&1; then
+    printf 'Dot Shell is running.\n'
+    return 0
+  fi
+
+  printf 'Dot Shell is not running.\n'
+  return 1
+}
+
+update_shell() {
+  command -v curl >/dev/null 2>&1 || die "curl is required to update"
+  printf 'Downloading the Dot Shell installer from %s\n' "$INSTALL_URL"
+  curl -fsSL "$INSTALL_URL" | sh
+}
+
+command_name=${1:-help}
+if [ "$#" -gt 0 ]; then
+  shift
+fi
+
+case "$command_name" in
+  start)
+    [ "$#" -eq 0 ] || die "start accepts no arguments"
+    start_shell
+    ;;
+  stop)
+    [ "$#" -eq 0 ] || die "stop accepts no arguments"
+    stop_shell
+    ;;
+  restart)
+    [ "$#" -eq 0 ] || die "restart accepts no arguments"
+    need_qs
+    qs -c "$CONFIG_NAME" kill >/dev/null 2>&1 || true
+    start_shell
+    ;;
+  status)
+    [ "$#" -eq 0 ] || die "status accepts no arguments"
+    status_shell
+    ;;
+  ipc)
+    [ "$#" -gt 0 ] || die "ipc requires a Quickshell IPC subcommand"
+    need_qs
+    exec qs -c "$CONFIG_NAME" ipc "$@"
+    ;;
+  update)
+    [ "$#" -eq 0 ] || die "update accepts no arguments"
+    update_shell
+    ;;
+  version)
+    [ "$#" -eq 0 ] || die "version accepts no arguments"
+    if [ -r "$version_file" ]; then
+      cat "$version_file"
+    else
+      printf 'development\n'
+    fi
+    ;;
+  help|-h|--help)
+    usage
+    ;;
+  *)
+    die "unknown command '$command_name'; run 'dot-shell help'"
+    ;;
+esac
