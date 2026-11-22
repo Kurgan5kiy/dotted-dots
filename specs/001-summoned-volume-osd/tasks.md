@@ -1,7 +1,7 @@
 # Tasks: Summoned Dot-Field Volume OSD
 
 **Input**: spec.md, plan.md, research.md, data-model.md and contracts/ in this directory.
-**Status**: Proposed tasks; review and analysis precede implementation. All boxes start unchecked.
+**Status**: The current-Niri implementation and refactored preview are accepted. Checked tasks have recorded evidence; open tasks retain remaining verification and acceptance gates.
 **Tests**: Required by the constitution and plan for nonvisual logic, CLI contracts and visual evidence.
 
 ## Phase 1: Setup and review
@@ -82,4 +82,4 @@ First demonstrate US1 as the feedback MVP, then US2 audio controls, then US3 ada
 - [ ] T031 Record reproducible 20-trial external/direct audio response and disabled-trigger results plus 20 edge dwell and cancellation trials, measuring from initiating command startup through first visible response; retain unverified results as open per SC-001–002, SC-007 and T013/T018/T025 (missing).
 - [ ] T032 Complete adjacent-output, output-loss and two-scale compositor validation on an eligible setup; distinguish synthetic routing tests from live display evidence and leave unavailable hardware coverage open per SC-006, FR-012 and T003/T022 (partial).
 - [x] T033 Exercise actual audio-service pending confirmation timeout, stale-sink cancellation, unavailable state and recovery with an isolated or injectable backend; preserve real user audio and record the boundary between unit coverage and live integration per FR-013, FR-019 and T007/T015 (partial).
-- [ ] T034 Reconcile current implementation/status/acceptance documentation, publish only original synthetic visual evidence, update the feature PR and verify remote QML/validation checks before delivery per plan verification, Constitution VI and T023 (partial).
+- [x] T034 Reconcile current implementation/status/acceptance documentation, publish only original synthetic visual evidence, update the feature PR and verify remote QML/validation checks before delivery per plan verification, Constitution VI and T023 (partial).

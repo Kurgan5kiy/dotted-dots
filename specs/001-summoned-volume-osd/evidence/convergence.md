@@ -16,12 +16,13 @@ were changed.
 | T031 / SC-001–002, SC-007: structured integration | Partial. The actual shell passed all three 20-trial audio/trigger groups in a private PipeWire graph. First-visible-frame timing and structured edge/cancellation trials remain unverified. |
 | T032 / SC-006, FR-012: multiple outputs and scales | Open. One physical output at scale 1 was available; unit routing tests are not mixed-scale compositor evidence. |
 | T033 / FR-013, FR-019: audio failure lifecycle | Implemented and verified with real AudioService, private null sinks, injected unconfirmed state, sink switching/removal and recovery. Physical device refusal is not claimed. |
-| T034 / delivery records and CI | Implementation/status docs and original synthetic evidence are published in the feature branch; the PR reports completed checks and remaining gates. GitHub CI must be green on the latest head. |
+| T034 / delivery records and CI | Complete. Implementation/status docs and original synthetic evidence are published; PR #8 reports completed checks and remaining gates. GitHub validation and QML checks passed on verification commit `330d8b0`. |
 
 The remaining findings are one contrast contradiction and two partial
 verification gaps, all high priority for final acceptance. Existing T003,
 T013, T018, T022, T025 and T026 remain open to the extent described by those
-findings. T023's CI integration and T033's isolated service checks are complete.
+findings. T023's CI integration, T033's isolated service checks and T034's
+delivery-record/PR updates are complete.
 
 The feature PR remains a draft. Full convergence, final acceptance and merge
 must not be reported while these gates remain unresolved.
