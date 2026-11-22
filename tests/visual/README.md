@@ -31,6 +31,10 @@ ffmpeg -y -framerate 10 -i dist/visual/pointer-retreat-%d.png \
 These sparse software-rendered frames document partial illumination and
 shrinking; judge smoothness in the live preview, not this 10 fps artifact.
 
+`dist/visual/states/` contains twenty additional state captures: hover,
+dragging, muted, unavailable and reduced motion on each of the four fixtures.
+They are exercised by `VolumeField::test_visualStates` with simulated audio.
+
 `pointer-{left,top,bottom}-boundary.png` capture the field at maximum configured
 follow range and liquid strength on a bright fixture. The regression checks
 assert full transparency at the non-screen boundaries rather than accepting a

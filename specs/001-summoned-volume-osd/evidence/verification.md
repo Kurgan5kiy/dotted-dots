@@ -29,10 +29,10 @@ Branch: `feature/06-volume-osd-runtime`. Status: current-Niri visual and interac
 
 ## Not yet established
 
-- The complete visual-state and normal/reduced-motion capture matrix under
-  revised SC-004. The user directed the spec to preserve the accepted design;
-  contrast limits remain documented diagnostics, not the superseded fixed
-  ratio gate or an accessibility certification.
+- Physical compositor variation beyond the recorded setup. The available
+  hover/drag/mute/unavailable/reduced-motion matrix is now captured across all
+  four fixtures for review. Contrast limits remain diagnostics, not the
+  superseded fixed-ratio gate or an accessibility certification.
 - Direct hardware-backend presentation latency and actual hardware refusing
   an audio write. The nested compositor's twenty-trial pixel measurements and
   private-graph recovery/switch checks now pass in their stated environments.

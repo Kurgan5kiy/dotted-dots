@@ -19,10 +19,13 @@ were changed.
 | T034 / delivery records and CI | Complete. Implementation/status docs and original synthetic evidence are published; PR #8 reports completed checks and remaining gates. GitHub validation and QML checks passed on verification commit `330d8b0`. |
 
 The remaining convergence finding is physical multi-output/scale verification.
-Full visual/state evidence remains tracked by T022 under revised SC-004;
-T003, T022, T025 and T026 remain open to that extent. T013/T018/T031's recorded
+The available visual-state matrix is now captured for review under revised
+SC-004. T003, T022, T025 and T026 remain open only to their remaining hardware
+coverage/convergence obligations. T013/T018/T031's recorded
 trigger/timing work, T023's CI integration, T033's isolated service checks and
 T034's delivery-record/PR updates are complete for their documented scope.
 
-The feature PR remains a draft. Full convergence, final acceptance and merge
-must not be reported while these gates remain unresolved.
+The user requested opening the PR for review without redundant validation.
+The existing PR is therefore marked ready for review, with untested physical
+multi-output/scale behavior disclosed. This does not claim full convergence,
+hardware verification, final acceptance or merge.

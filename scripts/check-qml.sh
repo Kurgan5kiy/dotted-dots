@@ -5,7 +5,7 @@ cd "$root_dir"
 qt_bin=${DOT_SHELL_QT_BIN:-/usr/lib/qt6/bin}
 qml_import=${DOT_SHELL_QML_IMPORT:-/usr/lib/qt6/qml}
 check_dir=$(mktemp -d "${TMPDIR:-/tmp}/dot-shell-qml-check.XXXXXX")
-mkdir -p dist/visual
+mkdir -p dist/visual/states
 trap 'rm -rf "$check_dir"' EXIT
 for qt_tool in qmlformat qmllint qmltestrunner; do
     test -x "$qt_bin/$qt_tool" || { printf 'Missing Qt tool: %s\n' "$qt_bin/$qt_tool" >&2; exit 1; }

@@ -34,10 +34,25 @@ measurements remain unchanged and document its visibility limits. They are
 not evidence of high-contrast accessibility certification. Do not add a shadow,
 card or larger opaque area solely to satisfy the superseded targets.
 
-## Outstanding coverage
+## Visual-state review evidence
 
-The complete normal/hover/active/unavailable visual capture matrix, open-window
-evidence, full normal/reduced-motion captures, adjacent displays, mixed scales
-and physical output removal remain outstanding. Existing unit tests and
-single-display acceptance do not establish those results. T022 retains that
-visual evidence work; T030's design/spec contradiction is resolved.
+Twenty additional captures now exercise hover, held slider drag, muted,
+unavailable and reduced-motion states on each of the four generated
+backgrounds. They use the real visual/control components with simulated audio;
+drag and mute are driven through their actual pointer hit targets. Assertions
+check hover/drag state, requested volume, mute, unavailable presentation and
+reduced-motion invariants. The field deformation is frozen at its settled
+shape for reproducible screenshots; native timing evidence covers emergence.
+
+`visual/state-matrix.png` is the review sheet. Rows are bright, busy, colorful
+and dark; columns are dragging, hovered, muted, reduced motion and unavailable.
+Individual images are in `visual/states/`. The existing four normal captures
+and native above-window recordings complete the available visual evidence for
+review. These are original synthetic fixtures, not personal desktop images.
+
+## Outstanding hardware coverage
+
+Adjacent physical displays, mixed scales and physical output removal remain
+untested. T022's visual capture portion is complete; its hardware portion and
+T032 remain open. T030's design/spec contradiction is resolved. The PR is ready
+for the user's requested review with these limits disclosed.

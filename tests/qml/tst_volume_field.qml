@@ -58,7 +58,7 @@ TestCase {
             property bool dragging: false
         }
     }
-    function setup(variant) {
+    function setup(variant, preferences) {
         mouseMove(testCase, 220, 270);
         var fixture = createTemporaryObject(fixtureFactory, this, {
             variant: variant
@@ -66,7 +66,7 @@ TestCase {
         var audio = createTemporaryObject(audioFactory, this);
         var controller = createTemporaryObject(controllerFactory, this);
         var field = createTemporaryObject(fieldFactory, fixture, {
-            preferences: Validation.defaults(),
+            preferences: preferences || Validation.defaults(),
             audio: audio,
             controller: controller
         });
@@ -268,5 +268,54 @@ TestCase {
             verify(image.red(x, 539) >= 254, "Dark field clipped at bottom edge, x=" + x);
         }
         image.save(Qt.resolvedUrl("../../dist/visual/pointer-" + data.tag + "-boundary.png").toString().replace(/^file:\/\//, ""));
+    }
+    function test_visualStates_data() {
+        var rows = [];
+        var backgrounds = ["bright", "dark", "colorful", "busy"];
+        for (var variant = 0; variant < backgrounds.length; variant++) {
+            for (var state of ["hover", "drag", "muted", "unavailable", "reduced"])
+                rows.push({
+                    tag: backgrounds[variant] + "-" + state,
+                    variant: variant,
+                    state: state
+                });
+        }
+        return rows;
+    }
+    function test_visualStates(data) {
+        var prefs = Validation.defaults();
+        // Capture the settled shape; native timing tests cover moving emergence.
+        prefs.motion.liquidStrength = 0;
+        prefs.motion.reduced = data.state === "reduced";
+        var scene = setup(data.variant, prefs);
+        if (data.state === "hover" || data.state === "reduced") {
+            mouseMove(scene.field, scene.field.columnX, 270);
+            verify(scene.controller.hovered);
+        } else if (data.state === "drag") {
+            mousePress(scene.field, scene.field.columnX, scene.field.chainTop + scene.field.chainHeight / 4);
+            verify(scene.controller.dragging);
+            compare(scene.audio.percent, 75);
+        } else if (data.state === "muted") {
+            mouseClick(scene.field, scene.field.columnX, scene.field.chainTop + scene.field.chainHeight + 36);
+            verify(scene.audio.muted);
+        } else {
+            scene.audio.available = false;
+            compare(scene.field.currentNode, -1);
+            compare(findChild(scene.field, "volumeValue").displayedText, "—");
+        }
+        wait(220);
+        if (data.state === "reduced") {
+            verify(!scene.field.light.settling);
+            compare(scene.field.light.fieldOffset, 0);
+            compare(scene.field.light.lightScale, 1);
+        }
+        var output = Qt.resolvedUrl("../../dist/visual/states/" + data.tag + ".png").toString().replace(/^file:\/\//, "");
+        var image = grabImage(scene.fixture);
+        compare(image.width, 180);
+        compare(image.height, 540);
+        image.save(output);
+        if (data.state === "drag")
+            mouseRelease(scene.field, scene.field.columnX, scene.field.chainTop + scene.field.chainHeight / 4);
+        mouseMove(testCase, 220, 270);
     }
 }
