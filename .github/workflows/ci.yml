@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Validate pull-request branch name
         if: github.event_name == 'pull_request'
@@ -28,6 +28,10 @@ jobs:
           fi
           printf '%s\n' "$HEAD_BRANCH" | \
             grep -Eq '^(feature|fix)/[0-9]{2}-[a-z0-9]+(-[a-z0-9]+)*$'
+
+      - name: Validate commit message
+        if: github.actor != 'dependabot[bot]'
+        run: python3 scripts/validate-commit-message.py "$(git log -1 --pretty=%B)"
 
       - name: Check whitespace
         run: git diff --check HEAD^
@@ -41,6 +45,7 @@ jobs:
           bash -n scripts/configure-github.sh
           bash -n scripts/bootstrap-spec-kit.sh
           bash -n tests/test-cli.sh
+          python3 -m py_compile scripts/validate-commit-message.py
 
       - name: Test CLI contract
         run: tests/test-cli.sh
@@ -52,4 +57,5 @@ jobs:
           test -s docs/product-vision.md
           test -s docs/interaction-model.md
           test -s docs/release-process.md
-          grep -F 'GPL-3.0-only' LICENSE
+          grep -F 'GNU GENERAL PUBLIC LICENSE' LICENSE
+          grep -F 'Version 3, 29 June 2007' LICENSE

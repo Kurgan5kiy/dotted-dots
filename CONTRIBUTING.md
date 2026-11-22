@@ -30,7 +30,8 @@ Rules:
 3. Create and review the Spec Kit artifacts for the bounded change.
 4. Implement and verify the approved tasks.
 5. Open a pull request against `main`.
-6. Squash merge after checks and review pass.
+6. Squash merge after checks and review pass. Set the squash commit message to
+   the sentence style documented below.
 7. Delete the merged branch.
 
 ## Releases
@@ -69,11 +70,12 @@ from the release branch and trigger release packaging.
 
 ## Commit messages
 
-Use Conventional Commit-style subjects where practical:
+Write commit messages as one to three complete sentences. Every sentence starts
+with a capital letter and ends with a period. Do not use Conventional Commit
+prefixes such as `feat:`, `fix:`, or `chore:`.
 
 ```text
-feat: add summoned dot field
-fix: preserve field placement across output changes
-docs: clarify compatible wallpaper metadata
-chore: update release packaging
+Add the summoned dot-field foundation.
+Preserve field placement when an output reconnects.
+Update release packaging. Document the new checksum verification behavior.
 ```

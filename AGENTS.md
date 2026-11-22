@@ -76,6 +76,9 @@ the field boundary.
 
 - Branch from current `main`.
 - Branch names are `feature/NN-kebab-case` or `fix/NN-kebab-case`.
+- Write commit messages as one to three complete sentences. Each sentence MUST
+  start with a capital letter and end with a period. Do not use Conventional
+  Commit prefixes.
 - Keep branches short-lived and rebase before review when necessary.
 - Pull requests into `main` use squash merge.
 - Never commit directly to a `release/YYYY.N` branch.

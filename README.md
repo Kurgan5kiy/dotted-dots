@@ -25,9 +25,6 @@ Dot Shell has two visual modes:
   lattice. Dot Shell awakens its existing dots and draws paths through them,
   making the interface feel as if it was inside the wallpaper all along.
 
-The atmosphere can be cinematic and technical, but the product does not copy
-eDEX-UI, Caelestia, or their layouts and functionality.
-
 ## Status
 
 **Pre-alpha / specification phase.** The repository currently contains the
