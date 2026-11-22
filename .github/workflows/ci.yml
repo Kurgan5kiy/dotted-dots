@@ -54,6 +54,7 @@ jobs:
           bash -n tests/test-visual-parity.sh
           python3 -m py_compile scripts/validate-commit-message.py
           python3 -m py_compile scripts/profile-osd.py
+          python3 -m py_compile tests/integration/test-private-audio.py
 
       - name: Test CLI contract
         run: tests/test-cli.sh

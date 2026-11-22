@@ -15,14 +15,23 @@ Branch: `feature/06-volume-osd-runtime`. Status: current-Niri visual and interac
 - QML formatting matches formatter output. Lint accepts only the documented Quickshell 0.3.2 metadata diagnostics: PanelWindow's runtime factory and VolumeOsd's opaque margins metadata. Other warnings, import errors and unexpected exit codes fail the check. These exceptions are not a claim of a warning-free upstream metadata set.
 - CLI forwarding and commit-message tests pass. IPC calls are explicitly delimited with `--` to avoid Quickshell treating the function name `show` as its own subcommand.
 - Package contents and SHA-256 tests pass. `tests/test-installed-runtime.sh` launched a temporary extracted package through its named config, checked CLI status/state/show, stopped it and removed its temporary files. Edge and automatic-audio triggers were disabled in that test; it sent no volume or mute changes.
+- Private PipeWire integration passed confirmed writes, the service deadline,
+  stale-sink cancellation, unavailable rejection and recovery. The instrumented
+  real shell passed 20 external, 20 direct-action and 20 disabled-trigger trials
+  against null sinks; see [actions.md](actions.md). Host audio was untouched.
 - Synthetic bright/dark/colorful/busy captures are reproducible at `dist/visual/` and contain original generated fixtures only. Personal desktop captures remain private temporary files outside the repository.
 
 ## Not yet established
 
 - Objective text and essential-control contrast on all backgrounds/states, particularly after widening the gradient; visual review is not a substitute for those measurements.
-- Full normal/reduced-motion capture matrix, end-to-end latency for 20 external and 20 binding-driven changes, actual audio-write failure/recovery and sink-switch integration tests.
+- Full normal/reduced-motion capture matrix and end-to-end presentation latency
+  for 20 external and 20 binding-driven changes. Private-graph recovery/switch
+  tests now pass; actual hardware refusing a write remains unverified.
 - Adjacent physical outputs, hotplug and fractional compositor scaling. Logical-size unit tests do not establish hardware compatibility.
 - Complete structured edge/cancellation trials. Named-hardware visual CPU/frame observations are now recorded in [quality and performance](quality-and-performance.md); these do not establish end-to-end latency or GPU presentation timing.
-- Remote QML CI and the remaining hardware/delivery acceptance work. Current single-display preview acceptance is recorded above.
+- Remaining hardware/delivery acceptance work. GitHub validation and QML CI
+  passed for the accepted implementation update; subsequent evidence updates
+  are verified against their own head commit before handoff. Current
+  single-display preview acceptance is recorded above.
 
 No claim of Converged is made. Open tasks and subsequent convergence findings remain required before review for merge or release.

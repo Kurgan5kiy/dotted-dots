@@ -52,7 +52,7 @@
 
 ## Phase 6: Integration and delivery
 
-- [ ] T023 Integrate QML formatting, import-aware lint and offscreen tests into `.github/workflows/ci.yml` and `scripts/check-qml.sh`, retaining existing checks and failing on unavailable required imports.
+- [x] T023 Integrate QML formatting, import-aware lint and offscreen tests into `.github/workflows/ci.yml` and `scripts/check-qml.sh`, retaining existing checks and failing on unavailable required imports.
 - [x] T024 Verify release archive, checksums, installed runtime lookup and CLI status in `tests/test-package.sh`; reconcile `bin/dot-shell`, `install.sh` and `scripts/package-release.sh` if necessary (FR-015).
 - [ ] T025 Run `specs/001-summoned-volume-osd/quickstart.md`, record idle and transition frame observations plus exact tested/untested environments in `specs/001-summoned-volume-osd/evidence/verification.md`; measure 20 automatic and 20 direct-action response trials separately using SC-002's command-invocation timing origin.
 - [ ] T026 Run Spec Kit convergence against `specs/001-summoned-volume-osd/tasks.md`, append unresolved work rather than silently relaxing requirements, and repeat implementation/verification until Converged before feature merge.
@@ -81,5 +81,5 @@ First demonstrate US1 as the feedback MVP, then US2 audio controls, then US3 ada
 - [ ] T030 Resolve the accepted theme's bright-background contrast mismatch through an explicit product decision, then capture and measure text and essential-indicator contrast on all four fixtures in normal, hovered, active and unavailable states; preserve the feathered boundary and record exact outcomes per SC-004 and FR-010 (contradicts).
 - [ ] T031 Record reproducible 20-trial external/direct audio response and disabled-trigger results plus 20 edge dwell and cancellation trials, measuring from initiating command startup through first visible response; retain unverified results as open per SC-001–002, SC-007 and T013/T018/T025 (missing).
 - [ ] T032 Complete adjacent-output, output-loss and two-scale compositor validation on an eligible setup; distinguish synthetic routing tests from live display evidence and leave unavailable hardware coverage open per SC-006, FR-012 and T003/T022 (partial).
-- [ ] T033 Exercise actual audio-service pending confirmation timeout, stale-sink cancellation, unavailable state and recovery with an isolated or injectable backend; preserve real user audio and record the boundary between unit coverage and live integration per FR-013, FR-019 and T007/T015 (partial).
+- [x] T033 Exercise actual audio-service pending confirmation timeout, stale-sink cancellation, unavailable state and recovery with an isolated or injectable backend; preserve real user audio and record the boundary between unit coverage and live integration per FR-013, FR-019 and T007/T015 (partial).
 - [ ] T034 Reconcile current implementation/status/acceptance documentation, publish only original synthetic visual evidence, update the feature PR and verify remote QML/validation checks before delivery per plan verification, Constitution VI and T023 (partial).
