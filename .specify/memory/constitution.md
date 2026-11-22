@@ -1,16 +1,3 @@
-<!--
-Sync Impact Report
-- Version: initial → 1.0.0
-- Established principles:
-  - Original Wallpaper-First Identity
-  - Accessible, Stable Interaction
-  - Modular Quickshell Architecture
-  - Measured Visual Performance
-  - Spec-Driven Vertical Slices
-  - Verifiable Delivery and Release Discipline
-- Templates requiring later Spec Kit initialization: pending managed scaffold
--->
-
 # Dot Shell Constitution
 
 ## Core Principles
@@ -22,6 +9,10 @@ implement both first-class interaction concepts defined in the product vision:
 
 1. a borderless summoned field whose dot opacity feathers continuously to zero;
 2. an embedded field aligned with dots in a compatible wallpaper.
+
+A summoned field MAY include a dark backdrop for contrast, including an opaque
+center. Its opacity MUST feather continuously to zero at the field boundary,
+revealing the content behind it. It MUST NOT have an outline or hard edge.
 
 The project MUST NOT copy the layout, interaction model, or functionality of
 eDEX-UI, Caelestia, or another shell. Inspiration MAY guide atmosphere, motion,
@@ -157,4 +148,4 @@ Compliance is reviewed during planning, artifact analysis, pull-request review,
 and convergence. Violations are resolved by changing the spec, plan, tasks, or
 implementation—not by silently weakening the constitution.
 
-**Version**: 1.0.0 | **Ratified**: 2026-11-22 | **Last Amended**: 2026-11-22
+**Version**: 2.0.0 | **Ratified**: 2026-11-22 | **Last Amended**: 2026-11-22

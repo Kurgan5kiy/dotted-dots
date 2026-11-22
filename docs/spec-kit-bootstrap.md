@@ -33,8 +33,11 @@ Build the first executable vertical slice: a summoned dot-field volume OSD.
 
 When volume changes, a borderless local field of evenly spaced dots appears
 near a configurable screen anchor. Dots are visible in the useful center and
-continuously fade to complete transparency toward every edge. There is no card
-fill, outline, or hard rectangular boundary.
+continuously fade to complete transparency toward every edge. A dark backdrop,
+which may be opaque at the center, also fades into the content underneath, with
+no outline or hard edge.
+The OSD appears above windows and can be summoned by moving the pointer to the
+right screen edge, emerging from right to left.
 
 A signal travels through selected nodes and constructs a readable volume value
 and interactive slider. The OSD shows mute state, supports keyboard and pointer
