@@ -7,7 +7,7 @@
 ## Phase 1: Setup and review
 
 - [ ] T001 Resolve artifact review and the constitution amendment through a pull request, updating `.specify/memory/constitution.md` and removing its temporary sync report before commit; record approval and any required spec corrections in `specs/001-summoned-volume-osd/spec.md`.
-- [ ] T002 Record Quickshell 0.3.2, Qt and Niri prerequisites and tool paths in `docs/development.md`; establish a test environment without modifying system packages, global Quickshell or user compositor configuration without authorization.
+- [x] T002 Record Quickshell 0.3.2, Qt and Niri prerequisites and tool paths in `docs/development.md`; establish a test environment without modifying system packages, global Quickshell or user compositor configuration without authorization.
 - [ ] T003 Create an isolated sensor experiment in `tests/integration/edge-sensor.qml` and record dwell, cancellation, edge clicks, focus, adjacent-output crossing and fractional-scale results in `specs/001-summoned-volume-osd/evidence/edge-input.md`; stop and revise artifacts if required behavior fails.
 
 ## Phase 2: Shared foundation
