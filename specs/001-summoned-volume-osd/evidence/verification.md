@@ -19,16 +19,28 @@ Branch: `feature/06-volume-osd-runtime`. Status: current-Niri visual and interac
   stale-sink cancellation, unavailable rejection and recovery. The instrumented
   real shell passed 20 external, 20 direct-action and 20 disabled-trigger trials
   against null sinks; see [actions.md](actions.md). Host audio was untouched.
+- Native pixel-response verification also passed twenty trials per audio mode
+  above a real opaque window in nested Niri: maxima 184.362 ms external and
+  206.089 ms through the public CLI. Twenty edge dwells showed leftward
+  emergence; twenty early exits cancelled. See [feedback.md](feedback.md) for
+  raw samples, thresholds and backend limitations. Six Python helper checks
+  cover capture validation and private-pointer safety.
 - Synthetic bright/dark/colorful/busy captures are reproducible at `dist/visual/` and contain original generated fixtures only. Personal desktop captures remain private temporary files outside the repository.
 
 ## Not yet established
 
-- Objective text and essential-control contrast on all backgrounds/states, particularly after widening the gradient; visual review is not a substitute for those measurements.
-- Full normal/reduced-motion capture matrix and end-to-end presentation latency
-  for 20 external and 20 binding-driven changes. Private-graph recovery/switch
-  tests now pass; actual hardware refusing a write remains unverified.
+- The complete visual-state and normal/reduced-motion capture matrix under
+  revised SC-004. The user directed the spec to preserve the accepted design;
+  contrast limits remain documented diagnostics, not the superseded fixed
+  ratio gate or an accessibility certification.
+- Direct hardware-backend presentation latency and actual hardware refusing
+  an audio write. The nested compositor's twenty-trial pixel measurements and
+  private-graph recovery/switch checks now pass in their stated environments.
 - Adjacent physical outputs, hotplug and fractional compositor scaling. Logical-size unit tests do not establish hardware compatibility.
-- Complete structured edge/cancellation trials. Named-hardware visual CPU/frame observations are now recorded in [quality and performance](quality-and-performance.md); these do not establish end-to-end latency or GPU presentation timing.
+- Physical adjacent-edge crossing and output removal. Structured edge dwell
+  and cancellation trials now pass in the private nested compositor. Named
+  visual CPU/frame observations are in [quality and performance](quality-and-performance.md);
+  compositor pixel captures are not physical scanout/GPU timestamp measurements.
 - Remaining hardware/delivery acceptance work. GitHub validation and QML CI
   passed for the accepted implementation update; subsequent evidence updates
   are verified against their own head commit before handoff. Current

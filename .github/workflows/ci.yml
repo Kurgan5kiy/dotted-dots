@@ -55,12 +55,16 @@ jobs:
           python3 -m py_compile scripts/validate-commit-message.py
           python3 -m py_compile scripts/profile-osd.py
           python3 -m py_compile tests/integration/test-private-audio.py
+          python3 -m py_compile tests/integration/test-native-timing.py tests/integration/virtual_pointer.py tests/integration/test_timing_helpers.py
 
       - name: Test CLI contract
         run: tests/test-cli.sh
 
       - name: Test commit-message validation
         run: tests/test-commit-message.sh
+
+      - name: Test timing evidence and private pointer guards
+        run: python3 tests/integration/test_timing_helpers.py
 
       - name: Test release package contents and checksums
         run: tests/test-package.sh

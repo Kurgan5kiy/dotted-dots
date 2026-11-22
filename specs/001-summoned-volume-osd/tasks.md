@@ -27,7 +27,7 @@
 - [x] T010 [US1] Implement reusable `src/visual/PathTrace.qml` and lifecycle in `src/surfaces/volume/Lifecycle.js` following data-model.md `Osd.phase` and `Interaction.hovered`, including interrupted retraction (FR-004, FR-007–008).
 - [x] T011 [US1] Implement `src/platform/EdgeSensor.qml` from accepted T003 findings following data-model.md `Interaction.edgeState` with per-output dwell, cancellation, disablement and rearm; add `tests/qml/tst_edge.qml` (FR-017).
 - [x] T012 [US1] Compose `src/surfaces/volume/VolumeOsd.qml` above windows with no keyboard focus, bounded input, current value, mute indication, hover pause and one visible instance (FR-002, FR-006, FR-016).
-- [ ] T013 [US1] Record the 20-change, 20-edge and 20-cancellation acceptance results in `specs/001-summoned-volume-osd/evidence/feedback.md` with latency method and environment (SC-001–002, SC-007).
+- [x] T013 [US1] Record the 20-change, 20-edge and 20-cancellation acceptance results in `specs/001-summoned-volume-osd/evidence/feedback.md` with latency method and environment (SC-001–002, SC-007).
 
 ## Phase 4: User Story 2 — Adjust volume (P1)
 
@@ -38,7 +38,7 @@
 - [x] T015 [US2] Extend `src/services/AudioService.qml` with validated writes, confirmation deadline and sink-switch cancellation following data-model.md `AudioOutput.pending`, `AudioOutput.percent` and `AudioOutput.sinkId`; implement above-cap handling per `contracts/actions.md` (FR-005, FR-013, FR-019).
 - [x] T016 [US2] Add stationary slider and minimal mute-dot hit targets to `src/surfaces/volume/VolumeOsd.qml`, with timeout and placement protection following data-model.md `Interaction.dragging` and `Interaction.hovered`, and no implicit unmute (FR-002, FR-005, FR-007–008).
 - [x] T017 [US2] Implement typed `src/ipc/VolumeActions.qml` target `volume_v1` and the documented JSON result contract, direct action summoning and optional show-only action; keep existing CLI forwarding compatible (FR-018–019).
-- [ ] T018 [US2] Document opt-in Niri volume and optional show bindings in `docs/configuration.md`; verify both trigger modes and record results in `specs/001-summoned-volume-osd/evidence/actions.md` without editing user Niri files (SC-001, SC-003).
+- [x] T018 [US2] Document opt-in Niri volume and optional show bindings in `docs/configuration.md`; verify both trigger modes and record results in `specs/001-summoned-volume-osd/evidence/actions.md` without editing user Niri files (SC-001, SC-003).
 
 ## Phase 5: User Story 3 — Adapt the experience (P2)
 
@@ -79,7 +79,7 @@ First demonstrate US1 as the feedback MVP, then US2 audio controls, then US3 ada
 ## Phase 8: Convergence
 
 - [x] T030 Resolve the visual design/spec contradiction through the user's explicit direction to adopt the accepted implementation; update FR-004, FR-010, SC-004 and dependent design/verification documents, retain measured contrast limits, and preserve the current appearance. The former fixed-ratio gate is superseded; full visual-state coverage remains in T022 (contradicts, resolved by approved spec revision).
-- [ ] T031 Record reproducible 20-trial external/direct audio response and disabled-trigger results plus 20 edge dwell and cancellation trials, measuring from initiating command startup through first visible response; retain unverified results as open per SC-001–002, SC-007 and T013/T018/T025 (missing).
+- [x] T031 Record reproducible 20-trial external/direct audio response and disabled-trigger results plus 20 edge dwell and cancellation trials, measuring from initiating command startup through first visible response; retain unverified results as open per SC-001–002, SC-007 and T013/T018/T025 (missing).
 - [ ] T032 Complete adjacent-output, output-loss and two-scale compositor validation on an eligible setup; distinguish synthetic routing tests from live display evidence and leave unavailable hardware coverage open per SC-006, FR-012 and T003/T022 (partial).
 - [x] T033 Exercise actual audio-service pending confirmation timeout, stale-sink cancellation, unavailable state and recovery with an isolated or injectable backend; preserve real user audio and record the boundary between unit coverage and live integration per FR-013, FR-019 and T007/T015 (partial).
 - [x] T034 Reconcile current implementation/status/acceptance documentation, publish only original synthetic visual evidence, update the feature PR and verify remote QML/validation checks before delivery per plan verification, Constitution VI and T023 (partial).

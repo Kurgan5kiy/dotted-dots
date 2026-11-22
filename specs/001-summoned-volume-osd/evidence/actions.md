@@ -35,13 +35,14 @@ and a single loaded OSD.
 SC-001 is satisfied in this isolated graph/environment. The already documented
 Niri binding examples remain opt-in and were not installed into user files.
 Actual hardware audio routes and compositor key dispatch are not established
-by these tests. T018 remains partial because its full keyboard/live trigger
-and latency acceptance work is not complete.
+by these tests. T018's opt-in binding documentation and both trigger modes are
+verified; the actual public CLI was also used by the later native latency
+trials. User binding files were never edited.
 
 ## Remaining timing and failure coverage
 
-The harness observes service state and loader/phase transitions through IPC;
-it does not time the compositor's first visible frame. No SC-002 presentation
-latency pass is claimed. Twenty presentation-latency trials for each mode,
-structured edge/cancellation trials, and physical-device failure/recovery
-coverage remain separate work.
+This audio-service harness observes state and loader/phase transitions, not
+pixels. The separate native suite now records twenty pixel-presentation trials
+per audio mode and twenty edge dwell/cancellation trials in `feedback.md`.
+Physical-device failure/recovery and actual key-event dispatch remain outside
+these isolated tests.

@@ -17,3 +17,14 @@
 ## Pending evidence
 
 Structured cancellation trials, presentation/audio response latency, edge clicks, fractional scales, output removal and adjacent-output crossing have not been verified. T003 is incomplete; this document is partial evidence only. No final OSD visual design or animation is exercised by the labelled diagnostic panel.
+
+## Subsequent implementation verification
+
+The accepted OSD's 100 ms dwell was later tested in the private nested Niri
+compositor described in `feedback.md`: twenty dwells opened one OSD each above
+an opaque application window, with sampled right-to-left emergence, and twenty
+early exits cancelled without changed pixels. Native audio-command pixel
+latency was measured separately. These results supplement this older 200 ms
+diagnostic; they do not establish physical adjacent-output crossing or mixed
+scales. T003 remains open for that coverage. The current QML check narrowly
+enumerates Quickshell's PanelWindow metadata warning; other diagnostics fail.

@@ -1,5 +1,51 @@
 # Live integration checks
 
+## Native pixel latency and edge cancellation
+
+```sh
+python3 tests/integration/test-native-timing.py --output dist/verification/native-timing.json
+python3 tests/integration/test_timing_helpers.py
+```
+
+Requires the installed Niri, Quickshell, PipeWire tools, `grim`,
+`dbus-run-session` and libwayland-client. No package installation is performed.
+The test opens one nested Niri window with its own configuration, runtime
+directory and D-Bus session; it never uses `--session`. A minimal Python
+virtual-pointer client connects explicitly to that owned private socket and
+rejects host sockets or paths escaping through symlinks. Your desktop cursor
+is not moved. Audio clients use the private null-sink server described below.
+
+The actual shell runs in a temporary copy with observation/reset handlers and
+a synthetic white background plus a real fullscreen white application window.
+Production audio, trigger, placement, lifecycle, visual components and motion
+defaults are retained. The direct-action trials invoke the real `bin/dot-shell`
+wrapper through a temporary named configuration.
+
+Each latency trial starts immediately before spawning its audio command. The
+test then captures only the OSD region inside the private compositor, using
+uncompressed PPM output from `grim`. A visible response requires at least 16
+pixels whose red channel changes from white by at least four code values.
+Reported times include command startup, IPC, capture and detection overhead,
+so they are conservative observed upper bounds for that pixel response. They
+do not measure human perception, physical display scanout, hardware audio
+confirmation or shell-process startup.
+
+There are 20 external-audio and 20 direct-CLI trials, each required to respond
+within 500 ms. Twenty edge dwells verify one summon each and record first,
+middle and settled compositor frames showing leftward field expansion. Twenty
+early exits must leave before the 100 ms dwell and produce neither a summon
+nor changed pixels. Resetting waits for a clean white capture, and output
+geometry must stay fixed during measurement.
+
+The JSON contains all raw samples; its sibling `*-frames/` directory contains
+60 synthetic PPM frames. No host desktop image or private artwork is captured.
+`--trials 1` is a smoke test only, not a 20-trial acceptance pass. Both the
+nested compositor and all test clients/servers are stopped on exit; the test
+shell also has a two-minute watchdog. This is Niri's nested Winit backend at
+one scale, not evidence for multiple physical displays or the direct hardware
+backend. The protocol ABI is based on the public
+[wlr virtual-pointer specification](https://github.com/swaywm/wlr-protocols/blob/master/unstable/wlr-virtual-pointer-unstable-v1.xml).
+
 ## Private audio-service and trigger checks
 
 Run `python3 tests/integration/test-private-audio.py` in the Wayland session
