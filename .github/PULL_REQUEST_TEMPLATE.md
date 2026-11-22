@@ -2,6 +2,9 @@
 
 <!-- What changes, and why? -->
 
+<!-- Before squash merge, use a 1–3 sentence commit message. Start every
+sentence with a capital letter and end it with a period. -->
+
 ## Specification
 
 <!-- Link the active feature spec, plan, and tasks. -->

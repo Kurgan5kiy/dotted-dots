@@ -5,6 +5,8 @@ dist/
 *.qmlc
 *.jsc
 *.log
+__pycache__/
+*.pyc
 
 # Environments and editors
 .env
