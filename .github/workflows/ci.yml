@@ -49,13 +49,25 @@ jobs:
           bash -n scripts/bootstrap-spec-kit.sh
           bash -n tests/test-cli.sh
           bash -n tests/test-commit-message.sh
+          bash -n scripts/check-qml.sh
+          bash -n tests/test-package.sh
+          bash -n tests/test-visual-parity.sh
           python3 -m py_compile scripts/validate-commit-message.py
+          python3 -m py_compile scripts/profile-osd.py
+          python3 -m py_compile tests/integration/test-private-audio.py
+          python3 -m py_compile tests/integration/test-native-timing.py tests/integration/virtual_pointer.py tests/integration/test_timing_helpers.py
 
       - name: Test CLI contract
         run: tests/test-cli.sh
 
       - name: Test commit-message validation
         run: tests/test-commit-message.sh
+
+      - name: Test timing evidence and private pointer guards
+        run: python3 tests/integration/test_timing_helpers.py
+
+      - name: Test release package contents and checksums
+        run: tests/test-package.sh
 
       - name: Validate repository policy files
         run: |
@@ -66,3 +78,21 @@ jobs:
           test -s docs/release-process.md
           grep -F 'GNU GENERAL PUBLIC LICENSE' LICENSE
           grep -F 'Version 3, 29 June 2007' LICENSE
+
+  qml:
+    name: qml
+    runs-on: ubuntu-latest
+    container: archlinux:base
+    steps:
+      - name: Install Quickshell and Qt test tools
+        run: pacman -Syu --needed --noconfirm quickshell qt6-declarative ripgrep git diffutils
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - name: Record tool versions
+        run: |
+          qs --version
+          /usr/lib/qt6/bin/qmllint --version
+      - name: Format, lint and test QML
+        run: scripts/check-qml.sh

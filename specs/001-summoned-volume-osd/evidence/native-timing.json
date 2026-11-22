@@ -1,0 +1,374 @@
+{
+  "environment": {
+    "output": {
+      "x": 0,
+      "y": 0,
+      "width": 934,
+      "height": 1136,
+      "scale": 1.0,
+      "transform": "Flipped180"
+    },
+    "geometry": {
+      "usable": true,
+      "width": 180,
+      "height": 540,
+      "x": 754,
+      "y": 298
+    },
+    "niri": "niri 26.04 (8ed0da4)",
+    "quickshell": "Quickshell 0.3.2 (revision , distributed by Arch Linux)",
+    "dwell_ms": 100,
+    "emerge_ms": 400,
+    "reduced_motion": false,
+    "backend": "nested Niri Winit",
+    "open_window_fixture": true
+  },
+  "external_ms": [
+    184.362,
+    126.954,
+    127.618,
+    141.394,
+    117.377,
+    121.878,
+    159.871,
+    125.927,
+    119.663,
+    127.832,
+    141.817,
+    130.855,
+    126.172,
+    109.465,
+    125.021,
+    95.252,
+    141.361,
+    120.132,
+    125.649,
+    108.652
+  ],
+  "direct_ms": [
+    135.61,
+    148.306,
+    160.267,
+    162.772,
+    160.361,
+    177.178,
+    145.108,
+    156.941,
+    159.786,
+    206.089,
+    122.883,
+    144.488,
+    162.151,
+    146.516,
+    143.889,
+    180.047,
+    133.162,
+    160.318,
+    163.873,
+    161.846
+  ],
+  "edge": [
+    {
+      "first_visible_ms": 273.229,
+      "first_x": 172,
+      "middle_x": 111,
+      "settled_x": 18,
+      "frames": [
+        "edge-01-first.ppm",
+        "edge-01-middle.ppm",
+        "edge-01-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 256.71,
+      "first_x": 172,
+      "middle_x": 100,
+      "settled_x": 18,
+      "frames": [
+        "edge-02-first.ppm",
+        "edge-02-middle.ppm",
+        "edge-02-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 290.909,
+      "first_x": 160,
+      "middle_x": 87,
+      "settled_x": 18,
+      "frames": [
+        "edge-03-first.ppm",
+        "edge-03-middle.ppm",
+        "edge-03-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 257.923,
+      "first_x": 160,
+      "middle_x": 87,
+      "settled_x": 18,
+      "frames": [
+        "edge-04-first.ppm",
+        "edge-04-middle.ppm",
+        "edge-04-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 243.781,
+      "first_x": 172,
+      "middle_x": 87,
+      "settled_x": 18,
+      "frames": [
+        "edge-05-first.ppm",
+        "edge-05-middle.ppm",
+        "edge-05-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 261.997,
+      "first_x": 172,
+      "middle_x": 100,
+      "settled_x": 18,
+      "frames": [
+        "edge-06-first.ppm",
+        "edge-06-middle.ppm",
+        "edge-06-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 331.862,
+      "first_x": 136,
+      "middle_x": 76,
+      "settled_x": 18,
+      "frames": [
+        "edge-07-first.ppm",
+        "edge-07-middle.ppm",
+        "edge-07-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 257.928,
+      "first_x": 172,
+      "middle_x": 87,
+      "settled_x": 18,
+      "frames": [
+        "edge-08-first.ppm",
+        "edge-08-middle.ppm",
+        "edge-08-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 261.358,
+      "first_x": 172,
+      "middle_x": 87,
+      "settled_x": 18,
+      "frames": [
+        "edge-09-first.ppm",
+        "edge-09-middle.ppm",
+        "edge-09-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 243.093,
+      "first_x": 172,
+      "middle_x": 87,
+      "settled_x": 18,
+      "frames": [
+        "edge-10-first.ppm",
+        "edge-10-middle.ppm",
+        "edge-10-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 244.713,
+      "first_x": 172,
+      "middle_x": 87,
+      "settled_x": 18,
+      "frames": [
+        "edge-11-first.ppm",
+        "edge-11-middle.ppm",
+        "edge-11-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 261.163,
+      "first_x": 160,
+      "middle_x": 87,
+      "settled_x": 18,
+      "frames": [
+        "edge-12-first.ppm",
+        "edge-12-middle.ppm",
+        "edge-12-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 251.558,
+      "first_x": 172,
+      "middle_x": 87,
+      "settled_x": 18,
+      "frames": [
+        "edge-13-first.ppm",
+        "edge-13-middle.ppm",
+        "edge-13-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 265.75,
+      "first_x": 172,
+      "middle_x": 87,
+      "settled_x": 18,
+      "frames": [
+        "edge-14-first.ppm",
+        "edge-14-middle.ppm",
+        "edge-14-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 280.44,
+      "first_x": 172,
+      "middle_x": 87,
+      "settled_x": 18,
+      "frames": [
+        "edge-15-first.ppm",
+        "edge-15-middle.ppm",
+        "edge-15-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 278.774,
+      "first_x": 160,
+      "middle_x": 76,
+      "settled_x": 18,
+      "frames": [
+        "edge-16-first.ppm",
+        "edge-16-middle.ppm",
+        "edge-16-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 247.152,
+      "first_x": 172,
+      "middle_x": 87,
+      "settled_x": 18,
+      "frames": [
+        "edge-17-first.ppm",
+        "edge-17-middle.ppm",
+        "edge-17-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 261.086,
+      "first_x": 172,
+      "middle_x": 87,
+      "settled_x": 18,
+      "frames": [
+        "edge-18-first.ppm",
+        "edge-18-middle.ppm",
+        "edge-18-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 243.901,
+      "first_x": 172,
+      "middle_x": 87,
+      "settled_x": 18,
+      "frames": [
+        "edge-19-first.ppm",
+        "edge-19-middle.ppm",
+        "edge-19-settled.ppm"
+      ]
+    },
+    {
+      "first_visible_ms": 244.835,
+      "first_x": 172,
+      "middle_x": 87,
+      "settled_x": 18,
+      "frames": [
+        "edge-20-first.ppm",
+        "edge-20-middle.ppm",
+        "edge-20-settled.ppm"
+      ]
+    }
+  ],
+  "cancelled": [
+    {
+      "residency_ms": 22.611,
+      "summoned": false
+    },
+    {
+      "residency_ms": 21.37,
+      "summoned": false
+    },
+    {
+      "residency_ms": 35.666,
+      "summoned": false
+    },
+    {
+      "residency_ms": 21.125,
+      "summoned": false
+    },
+    {
+      "residency_ms": 21.146,
+      "summoned": false
+    },
+    {
+      "residency_ms": 27.646,
+      "summoned": false
+    },
+    {
+      "residency_ms": 21.199,
+      "summoned": false
+    },
+    {
+      "residency_ms": 22.271,
+      "summoned": false
+    },
+    {
+      "residency_ms": 21.785,
+      "summoned": false
+    },
+    {
+      "residency_ms": 21.207,
+      "summoned": false
+    },
+    {
+      "residency_ms": 22.905,
+      "summoned": false
+    },
+    {
+      "residency_ms": 21.447,
+      "summoned": false
+    },
+    {
+      "residency_ms": 27.251,
+      "summoned": false
+    },
+    {
+      "residency_ms": 34.165,
+      "summoned": false
+    },
+    {
+      "residency_ms": 21.366,
+      "summoned": false
+    },
+    {
+      "residency_ms": 22.821,
+      "summoned": false
+    },
+    {
+      "residency_ms": 21.451,
+      "summoned": false
+    },
+    {
+      "residency_ms": 26.245,
+      "summoned": false
+    },
+    {
+      "residency_ms": 21.403,
+      "summoned": false
+    },
+    {
+      "residency_ms": 30.433,
+      "summoned": false
+    }
+  ]
+}

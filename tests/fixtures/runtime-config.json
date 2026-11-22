@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "edge": { "enabled": false },
+  "motion": { "reduced": true },
+  "triggers": { "externalAudioChanges": false }
+}
