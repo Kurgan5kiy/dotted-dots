@@ -21,12 +21,12 @@ Canvas {
     onSpacingChanged: requestPaint()
     onDotExclusionsChanged: requestPaint()
 
-    function smooth(t: real): real {
+    function smoothstep(t: real): real {
         const v = Math.max(0, Math.min(1, t));
         return v * v * (3 - 2 * v);
     }
     function fieldAlpha(depth: real): real {
-        return 0.96 * (1 - smooth((depth - 10) / 36));
+        return 0.96 * (1 - smoothstep((depth - 10) / 36));
     }
     onPaint: {
         const context = getContext("2d");
