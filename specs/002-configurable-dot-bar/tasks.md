@@ -64,7 +64,7 @@ T001–T006 gate story work. US1 is the first visual MVP; US2 adds the five widg
 
 ## Phase 8: Convergence
 
-- [ ] T029 Isolate bar changes on a short-lived feature branch from main after preserving the dirty volume work, per Constitution VI and T002 (partial).
+- [x] T029 Isolate bar changes on a short-lived feature branch from main after preserving the dirty volume work, per Constitution VI and T002.
 - [ ] T030 Verify live workspace activation and transient number, tray activation/menus, keyboard focus, and 20 auto-hide cycles with menu holds on each edge in Niri, per FR-006, FR-007 and SC-003 (partial).
 - [ ] T031 Verify named-output selection, both connected outputs, hotplug, shared-edge ownership and the remaining logical scales 1.25, 1.5 and 2, per FR-009, FR-010 and SC-005 (partial).
 - [ ] T032 Profile settled and hidden bar CPU/frame behavior on the stated hardware and record the result in `specs/002-configurable-dot-bar/evidence/performance.md`, per Constitution IV and T020 (partial).
@@ -93,4 +93,4 @@ T001–T006 gate story work. US1 is the first visual MVP; US2 adds the five widg
 - [ ] T049 Measure fresh-process settled and hidden bar-only CPU, memory and frame pacing on the stated hardware, and compare them with the same shell without the bar per FR-014 and Constitution IV (partial).
 - [ ] T050 Complete normal and reduced-motion visual review on bright, dark, colorful and busy wallpapers for every edge, preserving private captures outside Git per SC-004 (partial).
 - [ ] T051 Complete reviewer-owned `checklists/bar-ux.md` and resolve any requirement-quality gaps per T001 (missing).
-- [ ] T052 Separate the bar's review history from the volume branch after preserving both sets of work, rebasing from current main when the volume dependency lands per T029 and Constitution VI (partial).
+- [x] T052 Separate the bar's review history from the volume branch after preserving both sets of work, rebasing from current main when the volume dependency lands per T029 and Constitution VI.
