@@ -1,21 +1,29 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
+import "EdgeZones.js" as EdgeZones
 import "../surfaces/volume/Lifecycle.js" as Lifecycle
 
 PanelWindow {
     id: root
     required property var preferences
+    required property string outputName
+    required property real outputHeight
     property bool osdVisible: false
+    property bool suppressed: false
     property string edgeState: "armed"
-    signal summoned
+    readonly property string side: EdgeZones.resolveSide(preferences.edge, outputName)
+    readonly property var zone: EdgeZones.bounds(outputHeight)
+    signal summoned(string side)
     anchors {
-        right: true
+        left: root.side === "left"
+        right: root.side === "right"
         top: true
-        bottom: true
     }
+    margins.top: zone.middleTop
     implicitWidth: preferences.edge.width
-    visible: preferences.edge.enabled
+    implicitHeight: zone.middleHeight
+    visible: preferences.edge.enabled && !suppressed
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Overlay
@@ -31,7 +39,7 @@ PanelWindow {
         onTriggered: {
             root.edgeState = Lifecycle.edge(root.edgeState, "elapsed");
             if (root.edgeState === "latched")
-                root.summoned();
+                root.summoned(root.side);
         }
     }
     MouseArea {

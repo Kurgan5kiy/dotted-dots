@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import "EdgeZones.js" as EdgeZones
 import "Routing.js" as Routing
 
 QtObject {
@@ -7,8 +8,12 @@ QtObject {
     required property var preferences
     property var selected: null
     property bool fixedPlacement: false
-    property string anchor: preferences.placement.anchor
+    property string focusOutput: ""
+    property string side: "right"
     property bool fromEdge: false
+    readonly property bool locked: fixedPlacement && selected !== null
+    readonly property string screenId: selected ? selected.name : ""
+    readonly property string anchor: side + "-center"
     readonly property var screens: Quickshell.screens
     readonly property var geometry: selected ? Routing.geometry(selected.width, selected.height, preferences.field, fromEdge ? 0 : preferences.placement.margin, anchor) : ({
             usable: false,
@@ -18,18 +23,22 @@ QtObject {
             y: 0
         })
     signal outputLost
-    function choose(screen: var): void {
-        if (fixedPlacement && Routing.contains(screens, selected))
+
+    function choose(screen: var, requestedSide: string): void {
+        if (locked && Routing.contains(screens, selected))
             return;
-        selected = screen || Routing.select(screens, preferences.placement.output);
+        selected = Routing.selectForInvocation(screens, screen, focusOutput, preferences.placement.fallbackOutput);
         fromEdge = screen !== null;
-        anchor = screen ? "right-center" : preferences.placement.anchor;
+        side = requestedSide || (selected ? EdgeZones.resolveSide(preferences.edge, selected.name) : preferences.edge.side);
     }
+
     onScreensChanged: {
         if (!Routing.contains(screens, selected)) {
             outputLost();
-            selected = Routing.select(screens, preferences.placement.output);
+            selected = Routing.selectForInvocation(screens, null, focusOutput, preferences.placement.fallbackOutput);
+            fromEdge = false;
+            side = selected ? EdgeZones.resolveSide(preferences.edge, selected.name) : preferences.edge.side;
         }
     }
-    Component.onCompleted: choose(null)
+    Component.onCompleted: choose(null, "")
 }

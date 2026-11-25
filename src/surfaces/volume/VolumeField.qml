@@ -7,9 +7,11 @@ Item {
     required property var preferences
     required property var audio
     required property var controller
+    property string side: "right"
     readonly property FieldLight light: fieldLight
     readonly property real spacing: preferences.field.spacing
-    readonly property real columnX: spacing / 2 + (Math.floor(width / spacing) - 3) * spacing
+    readonly property real rightColumnX: spacing / 2 + (Math.floor(width / spacing) - 3) * spacing
+    readonly property real columnX: side === "left" ? width - rightColumnX : rightColumnX
     readonly property real chainTop: spacing / 2 + 4 * spacing
     readonly property int intervals: Math.max(2, Math.floor(height / spacing) - 10)
     readonly property real chainHeight: intervals * spacing
@@ -24,6 +26,7 @@ Item {
         preferences: root.preferences
         width: root.width
         height: root.height
+        side: root.side
         shown: root.controller.phase !== "dormant" && root.controller.phase !== "retracting"
     }
     FontLoader {
@@ -36,6 +39,7 @@ Item {
         opacity: fieldLight.proximity
         FluidBackdrop {
             anchors.fill: parent
+            side: root.side
             shapes: fieldLight.shapes
             offset: fieldLight.fieldOffset
             feather: root.preferences.field.feather
@@ -94,9 +98,10 @@ Item {
             onToggled: root.audio.act("toggleMute", 0, root.preferences.volume.stepPercent, root.preferences.volume.maxPercent)
         }
         Text {
-            x: 24
+            readonly property real errorX: root.side === "left" ? root.columnX + 20 : 24
+            x: errorX
             y: root.height / 2
-            width: Math.max(1, root.columnX - 44)
+            width: Math.max(1, root.side === "left" ? root.width - errorX - 24 : root.columnX - 44)
             text: root.audio.error || (!root.audio.available ? "Audio unavailable" : "")
             wrapMode: Text.WordWrap
             color: "white"

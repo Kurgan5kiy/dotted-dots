@@ -29,6 +29,8 @@ while IFS= read -r -d '' qml_file; do
             /^Warning:|^Error:|^Critical:/ {
                 known = ($0 ~ /Type PanelWindow is not creatable\. \[uncreatable-type\]$/)
                 if (file == "src/surfaces/volume/VolumeOsd.qml" && $0 ~ /Could not find property "(left|top)"\. \[missing-property\]$/) known = 1
+                if (file == "src/platform/EdgeSensor.qml" && $0 ~ /Could not find property "top"\. \[missing-property\]$/) known = 1
+                if (file == "src/surfaces/bar/BarWindow.qml" && $0 ~ /Could not find property "(item|window)"\. \[missing-property\]$/) known = 1
                 if (!known) bad = 1
                 seen = 1
             }

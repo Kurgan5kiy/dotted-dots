@@ -124,6 +124,20 @@ TestCase {
         verify(scene.audio.muted);
         compare(scene.audio.lastRequest.kind, "toggleMute");
     }
+    function test_leftSideChangesAnchorWithoutMirroringControls() {
+        var scene = setup(0);
+        var rightColumn = scene.field.columnX;
+        scene.field.side = "left";
+        compare(scene.field.columnX, scene.field.width - rightColumn);
+        compare(scene.field.light.side, "left");
+        compare(scene.field.light.fieldOffset, 0);
+        verify(scene.field.columnX < scene.field.width / 2);
+        wait(100);
+        var image = grabImage(scene.fixture);
+        verify(image.red(2, 270) < 40);
+        verify(image.red(179, 270) > 240);
+        image.save(Qt.resolvedUrl("../../dist/visual/left-edge.png").toString().replace(/^file:\/\//, ""));
+    }
     function test_initialLevelDoesNotFillFromZero() {
         var fixture = createTemporaryObject(fixtureFactory, this);
         var audio = createTemporaryObject(audioFactory, this);

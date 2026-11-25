@@ -34,3 +34,4 @@
 - The constitution amendment and initial artifacts were reviewed through merged PR #6. The user accepted the implementation and directed this revision to adopt its visual pattern; the approved-design section supersedes earlier preview directions.
 - Requirement IDs and scope are preserved. SC-004 now checks the approved design and records contrast limits rather than imposing the superseded fixed ratios. No clarification marker remains.
 - The remaining unchecked outcome item reflects outstanding structured timing, visual-state and display evidence. It is not a claim that those acceptance results passed. The reviewer-owned UX/integration checklist is unchanged.
+- The 2026-11-23 dual-monitor refinement defines focused-display routing for non-pointer summons, per-display mouse edge discovery, stable placement during interaction and measurable two-display acceptance trials. No clarification marker was needed.

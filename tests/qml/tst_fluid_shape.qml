@@ -10,6 +10,12 @@ TestCase {
         verify(FluidShape.alphaAt(90, 270, 180, 540, 96, 0, shapes, 1) > 0.5);
         compare(FluidShape.alphaAt(0, 0, 180, 540, 96, 0, shapes, 1), 0);
     }
+    function test_fieldTravelsInFromLeft() {
+        var shapes = FluidShape.describe(0, 1);
+        compare(FluidShape.alphaAt(90, 270, 180, 540, 96, -180, shapes, 1, "left"), 0);
+        verify(FluidShape.alphaAt(90, 270, 180, 540, 96, 0, shapes, 1, "left") > 0.5);
+        compare(FluidShape.alphaAt(180, 0, 180, 540, 96, 0, shapes, 1, "left"), 0);
+    }
     function test_boundedSettlingReturnsToBase() {
         var first = FluidShape.describe(0, 1);
         var last = FluidShape.describe(Math.PI * 6, 1);

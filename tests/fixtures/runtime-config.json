@@ -1,5 +1,6 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 3,
+  "bar": { "edge": "top", "visibility": "always", "outputs": "all" },
   "edge": { "enabled": false },
   "motion": { "reduced": true },
   "triggers": { "externalAudioChanges": false }

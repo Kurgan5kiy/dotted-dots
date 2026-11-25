@@ -27,14 +27,15 @@ Dot Shell has two visual modes:
 
 ## Status
 
-**Pre-alpha / implementation validation.** The first summoned volume OSD is
-implemented with right-edge activation, a fluid dot field, volume and mute
-controls, configurable motion, and versioned CLI/IPC actions. Its reviewed
-preview is undergoing final verification; no release is available yet.
+**Pre-alpha / implementation validation.** The summoned volume OSD supports
+focused-output routing and mouse access on connected monitors. A configurable
+dot bar preview now supports four edges, per-output workspace dots, clock,
+volume, battery, tray, and always-visible or auto-hide modes. The bar is being
+visually refined; live four-edge, hotplug, tray-menu, and reduced-motion
+acceptance remains open. No release is available yet.
 
 ## Planned surfaces
 
-- Adaptive bar and Niri workspaces
 - Audio, brightness, and media OSDs
 - Application launcher
 - Notifications and quick settings

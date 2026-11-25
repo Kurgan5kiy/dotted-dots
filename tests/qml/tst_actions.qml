@@ -1,5 +1,6 @@
 import QtQuick
 import QtTest
+import "../../src/platform/Routing.js" as Routing
 import "../../src/services/AudioState.js" as AudioState
 
 TestCase {
@@ -48,5 +49,19 @@ TestCase {
             percent: null,
             muted: true
         }, 5, 100).muted, false);
+    }
+    function test_dormantActionUsesFocusAndVisibleActionStaysLocked() {
+        var screens = [
+            {
+                name: "eDP-1"
+            },
+            {
+                name: "DP-1"
+            }
+        ];
+        var selected = Routing.selectForInvocation(screens, null, "DP-1", "");
+        compare(selected, screens[1]);
+        compare(Routing.keepOrSelect(screens, selected, true, null, "eDP-1", ""), screens[1]);
+        compare(Routing.keepOrSelect(screens, selected, false, null, "eDP-1", ""), screens[0]);
     }
 }
