@@ -27,12 +27,26 @@ def strip_trailers(message: str) -> str:
     return "\n".join(lines[:trailer_start])
 
 
+def strip_generated_squash_history(message: str) -> str:
+    """Treat GitHub's commit-subject list as merge metadata, not prose."""
+    lines = message.strip().splitlines()
+    if not lines:
+        return message
+
+    details = [line.strip() for line in lines[1:] if line.strip()]
+    if len(details) >= 2 and details[-1] == "---------" and all(
+        re.fullmatch(r"\* [A-Z].*\.", line) for line in details[:-1]
+    ):
+        return lines[0]
+    return message
+
+
 def fail(reason: str) -> None:
     print(f"Invalid commit message: {reason}", file=sys.stderr)
     raise SystemExit(1)
 
 
-lines = strip_trailers(" ".join(sys.argv[1:])).strip().splitlines()
+lines = strip_generated_squash_history(strip_trailers(" ".join(sys.argv[1:]))).strip().splitlines()
 if lines:
     # GitHub appends a pull-request reference to squash commit subjects.
     lines[0] = re.sub(r"\s+\(#[0-9]+\)$", "", lines[0])
