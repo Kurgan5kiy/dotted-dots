@@ -6,7 +6,7 @@ TestCase {
     name: "Edge"
     function test_repeatedCancellation() {
         var state = "armed";
-        for (var i = 0; i < 20; i++) {
+        for (let i = 0; i < 20; i++) {
             state = Lifecycle.edge(state, "enter");
             compare(state, "dwelling");
             state = Lifecycle.edge(state, "leave");

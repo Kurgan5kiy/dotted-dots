@@ -10,9 +10,9 @@
 
 ## Overlay and edge input
 
-**Decision**: Use a configurable, initially one-logical-pixel edge-anchored layer-shell sensor and a bounded overlay with restricted input regions and no keyboard focus. The sensor owns input only in its strip; the visible OSD owns input over its field for hover and controls. Do not claim passive global observation or click-through inside those regions. Live testing remains required.
+**Decision**: Use one configurable one-to-four-logical-pixel layer-shell sensor per output, limited to the middle third of its resolved left or right edge, plus a bounded overlay with restricted input and no keyboard focus. The sensor owns input only in its narrow middle strip; the visible OSD owns input over its field for hover and controls. Reserved top/bottom thirds have no Dot Shell surface. Live testing remains required.
 
-**Rationale**: [Layer-shell](https://quickshell.org/docs/v0.3.1/types/Quickshell.Wayland/WlrLayershell/) supports edge surfaces; [window masks](https://quickshell.org/docs/v0.3.0/types/Quickshell/QsWindow/) limit click regions. Neither establishes passive hover detection with complete input pass-through or unobstructed crossing at adjacent-output edges. Hover across the OSD presents the same tradeoff. Test on Niri before approving the design.
+**Rationale**: [Layer-shell](https://quickshell.org/docs/v0.3.1/types/Quickshell.Wayland/WlrLayershell/) supports edge surfaces and margins. Sizing the actual sensor window to the middle third preserves pass-through in the reserved thirds. Layer shell does not establish unobstructed crossing at adjacent-output edges, so live Niri testing remains required.
 
 **Alternatives**: Full-screen input capture disrupts applications; pointer polling conflicts with performance rules. A compositor-specific event mechanism requires verification and an isolated adapter. Failure returns the requirement to clarification.
 
@@ -38,12 +38,105 @@
 
 **Alternatives**: Full-screen canvases and repaint loops conflict with performance requirements; native rendering is unjustified without measurements.
 
+## Focused-output routing on Niri 26.04
+
+**Decision**: Add a Niri-specific adapter around one long-lived
+`niri msg -j event-stream` process. Reduce initial and incremental workspace
+events into the currently focused output name and readiness/diagnostic state.
+Use that output only for a dormant non-pointer summon; keep the selected output
+fixed until the OSD returns to dormant.
+
+**Rationale**: Niri 26.04 provides complete initial workspace state followed by
+incremental `WorkspacesChanged` and focused `WorkspaceActivated` events. Each
+workspace identifies its output. This gives authoritative focused-output state
+without a recurring poll or process spawn for every volume event. Niri-specific
+parsing remains behind the platform boundary and unknown event variants can be
+ignored for forward compatibility.
+
+**Alternatives considered**: Running `niri msg -j focused-output` for every
+summon is simple but adds startup latency and races. Tracking only focused-window
+events does not provide enough workspace/output context. Interactive window
+picking, full-screen input surfaces, global cursor polling and native helpers
+violate the interaction, performance or dependency constraints.
+
+## Pointer-output fallback on empty workspaces
+
+**Decision**: On the Niri 26.04 baseline, use the same focused-output event
+state as the pointer-output fallback only when the compositor configuration
+uses focus-follows-mouse. Validate 20/20 empty-workspace trials across both
+physical outputs on the user's existing configuration. If any trial fails,
+return to the specification; do not substitute global capture or polling.
+
+**Rationale**: Niri 26.04 exposes no cursor-position or pointer-output IPC, and
+Quickshell 0.3.2 exposes no global cursor position. With focus-follows-mouse,
+crossing outputs updates Niri's focused workspace/output even when no window is
+focused, providing the requested result through the event stream. This is a
+documented platform prerequisite, not a generic Wayland guarantee.
+
+**Alternatives considered**: A portal screencast can expose cursor metadata but
+adds consent, capture lifecycle and avoidable dependencies. Pointer constraints,
+virtual pointers and relative-pointer protocols do not passively reveal global
+position. A configured fixed fallback does not satisfy the clarified behavior.
+
+## Per-output edge zones and mirroring
+
+**Decision**: Create one narrow layer-shell sensor per connected output, placed
+only over the middle third of its resolved left or right logical edge. Compute
+top and bottom margins as `floor(height / 3)`, leaving the zero-to-two-pixel
+remainder in the middle. Emit output plus side and mirror only side-aware
+geometry/motion—not the entire visual tree.
+
+**Rationale**: A middle-third window leaves the reserved top and bottom thirds
+without any Dot Shell input surface. Pure arithmetic and profile resolution are
+deterministically testable across scales. Explicit inward direction preserves
+readable text and stable controls on both sides.
+
+**Alternatives considered**: A full-height transparent window with a middle
+MouseArea can still own input in reserved zones. Negative scaling mirrors text
+and controls. A single sensor cannot represent independent per-output sides.
+Shared edges remain compositor-dependent and require live testing.
+
+## Configuration schema v2
+
+**Decision**: Introduce schema v2 and accept schema v1 through an in-memory,
+non-writing migration. Replace fixed `placement.output` semantics with
+`placement.fallbackOutput`; add global `edge.side` and bounded named
+`edge.outputs` profiles. Each profile has either an explicit `side`, or
+`copyOf` plus `mirror`. Keep the volume action target at v1.
+
+**Rationale**: Focused-output routing changes the old output field from primary
+selection to final fallback, which warrants an explicit configuration version.
+Named copy relationships avoid unstable output enumeration. A global default
+of `right` gives the requested right/right profile without requiring private
+output names. Presentation routing does not change the public action payloads.
+
+**Alternatives considered**: Silently adding fields to v1 hides the changed
+placement meaning. A `first`/`second` mode depends on enumeration order. A bare
+output-to-side map cannot express requested copy/mirror relationships. User
+files must never be rewritten automatically.
+
+## Logical edge bounds
+
+**Decision**: Divide each Quickshell `ShellScreen` logical height into thirds on
+the initial baseline. Document that Quickshell 0.3.2 exposes no dependable
+compositor work-area property and that third-party exclusive zones are not
+subtracted.
+
+**Rationale**: The overlay is output-relative and the current implementation
+already uses logical output geometry. This produces deterministic zones across
+scale factors while avoiding an unreliable inferred work area.
+
+**Alternatives considered**: Deriving reservations from unrelated layer-shell
+clients is incomplete and would couple the feature to compositor internals.
+Claiming reserved-area support without a trustworthy source would violate the
+delivery evidence rules.
+
 ## Pointer-following light: outside-surface investigation
 
 **Requested behavior**: A bounded moving dark patch illuminates stationary
-controls. During departure it continues following the actual pointer while
-shrinking and fading. The user requested investigation of exact tracking and
-has not accepted extrapolation from the last exit direction.
+controls. The accepted Niri 26.04 behavior uses a short finite continuation of
+the last outward direction while shrinking and fading; exact outside-surface
+tracking is not part of this refinement.
 
 **Verified locally**: The running compositor advertises wlr screencopy v3,
 virtual pointer v2, pointer constraints v1, pointer gestures v3 and relative
@@ -71,11 +164,10 @@ pointer v1. It does not advertise ext-image-copy-capture. The installed
   from the running compositor; compatibility, a client adapter, packaging and
   performance still require validation.
 
-**Decision pending**: Select between a compositor version supporting cursor-only
-capture, a portal/PipeWire prototype on the current compositor, or a revised
-outside-tracking requirement. No compositor installation, screen-sharing
-session, global input capture or runtime tracking change was performed by this
-investigation. Update the plan before introducing a dependency or native helper.
+**Decision**: Retain the accepted bounded surface-local follow and finite
+departure drift. Do not add cursor capture, a portal session, compositor
+installation, global input capture, native helper or runtime dependency. Reopen
+this research only if a future specification requires exact outside tracking.
 
 ### Upstream support verification
 

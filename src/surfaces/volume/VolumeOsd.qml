@@ -28,5 +28,6 @@ PanelWindow {
         preferences: root.preferences
         audio: root.audio
         controller: root.controller
+        side: root.router.side
     }
 }

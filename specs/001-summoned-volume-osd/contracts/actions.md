@@ -19,6 +19,12 @@ Above-cap observed state is preserved by `state` and the value label; the slider
 
 Accepted volume/mute actions summon the OSD directly, independently of the external-change trigger setting. This permits binding-driven operation if passive audio-change summoning is too delayed. Keep state observation for accuracy, and never show the requested value as confirmed until observed.
 
+Presentation routing does not change this action contract. A dormant action
+summons one OSD on the focused output selected by the platform adapter, with the
+documented pointer/fallback behavior when needed. An already-visible OSD stays
+on its selected output until full dismissal. Callers cannot override an output
+or create duplicate OSDs through `volume_v1`; therefore the target remains v1.
+
 ## User-owned Niri binding examples
 
 ```kdl

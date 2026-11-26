@@ -21,5 +21,6 @@ qs -d -c dot-shell --no-color
 "$test_cli" status
 "$test_cli" ipc call volume_v1 state | jq -e '.version == 1 and (.available | type == "boolean")' >/dev/null
 "$test_cli" ipc call volume_v1 show | jq -e '.status == "accepted"' >/dev/null
+"$test_cli" ipc call bar_v1 reveal "" | jq -e '.version == 1 and .status == "accepted"' >/dev/null
 "$test_cli" stop
 printf 'Installed runtime lookup, IPC and lifecycle smoke test passed.\n'

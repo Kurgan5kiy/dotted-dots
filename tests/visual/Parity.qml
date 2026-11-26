@@ -124,8 +124,8 @@ TestCase {
         var before = grabImage(left);
         var after = grabImage(right);
         var maxDifference = 0;
-        for (var y = 0; y < 540; y++) {
-            for (var x = 0; x < 180; x++) {
+        for (let y = 0; y < 540; y++) {
+            for (let x = 0; x < 180; x++) {
                 maxDifference = Math.max(maxDifference, Math.abs(before.red(x, y) - after.red(x, y)), Math.abs(before.green(x, y) - after.green(x, y)), Math.abs(before.blue(x, y) - after.blue(x, y)));
             }
         }

@@ -1,5 +1,6 @@
 import QtQuick
 import QtTest
+import "../../src/platform/EdgeZones.js" as EdgeZones
 import "../../src/platform/Routing.js" as Routing
 
 TestCase {
@@ -19,6 +20,52 @@ TestCase {
         verify(!Routing.contains(screens, {
             name: "removed"
         }));
+    }
+    function test_invocationSelection() {
+        var screens = [
+            {
+                name: "one"
+            },
+            {
+                name: "two"
+            }
+        ];
+        compare(Routing.selectForInvocation(screens, null, "two", "one"), screens[1]);
+        compare(Routing.selectForInvocation(screens, screens[0], "two", ""), screens[0]);
+        compare(Routing.selectForInvocation(screens, null, "missing", "two"), screens[1]);
+        compare(Routing.selectForInvocation(screens, null, "missing", "missing"), screens[0]);
+    }
+    function test_profileResolution() {
+        var edge = {
+            side: "right",
+            outputs: {
+                one: {
+                    side: "left"
+                },
+                two: {
+                    copyOf: "one",
+                    mirror: false
+                },
+                three: {
+                    copyOf: "one",
+                    mirror: true
+                }
+            }
+        };
+        compare(EdgeZones.resolveSide(edge, "one"), "left");
+        compare(EdgeZones.resolveSide(edge, "two"), "left");
+        compare(EdgeZones.resolveSide(edge, "three"), "right");
+        compare(EdgeZones.resolveSide(edge, "missing"), "right");
+    }
+    function test_middleThird() {
+        compare(EdgeZones.bounds(100).topHeight, 33);
+        compare(EdgeZones.bounds(100).middleTop, 33);
+        compare(EdgeZones.bounds(100).middleHeight, 34);
+        compare(EdgeZones.bounds(100).bottomTop, 67);
+        compare(EdgeZones.zoneAt(32, 100), "top");
+        compare(EdgeZones.zoneAt(33, 100), "middle");
+        compare(EdgeZones.zoneAt(66, 100), "middle");
+        compare(EdgeZones.zoneAt(67, 100), "bottom");
     }
     function test_placement() {
         var g = Routing.geometry(1920, 1200, {
@@ -43,10 +90,10 @@ TestCase {
     }
     function test_logicalScaleSizes() {
         var scales = [1, 1.25, 1.5, 2];
-        for (var i = 0; i < scales.length; i++) {
-            var logicalWidth = 1920 / scales[i];
-            var logicalHeight = 1200 / scales[i];
-            var g = Routing.geometry(logicalWidth, logicalHeight, {
+        for (let i = 0; i < scales.length; i++) {
+            const logicalWidth = 1920 / scales[i];
+            const logicalHeight = 1200 / scales[i];
+            const g = Routing.geometry(logicalWidth, logicalHeight, {
                 width: 180,
                 height: 540,
                 spacing: 18

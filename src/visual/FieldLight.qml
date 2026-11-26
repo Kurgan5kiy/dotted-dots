@@ -9,6 +9,7 @@ QtObject {
     required property real width
     required property real height
     required property bool shown
+    property string side: "right"
     readonly property bool reduced: preferences.motion.reduced
     readonly property int fadeMs: reduced ? 100 : shown ? preferences.timing.emergeMs : preferences.timing.retractMs
     readonly property int followMs: reduced ? 0 : pointerRetreat ? fadeMs : preferences.motion.followMs
@@ -23,15 +24,15 @@ QtObject {
     property point lastDelta: Qt.point(0, 0)
     property bool pointerSeen: false
     property bool pointerRetreat: false
-    readonly property real fieldOffset: reduced ? 0 : fieldTravel
+    readonly property real fieldOffset: reduced ? 0 : (side === "left" ? -fieldTravel : fieldTravel)
     readonly property real lightScale: reduced ? 1 : fieldScale
     readonly property var shapes: {
         const fluid = FluidShape.describe(fluidPhase, reduced ? 0 : preferences.motion.liquidStrength);
         const shifted = FluidShape.transformed(fluid, reduced ? 0 : followX, reduced ? 0 : followY, lightScale);
-        return FluidShape.contained(shifted, width, height, fieldOffset, 2);
+        return FluidShape.contained(shifted, width, height, fieldOffset, 2, side);
     }
-    readonly property var samples: FluidShape.prepare(shapes, width, height, preferences.field.feather, fieldOffset)
-    readonly property var restingSamples: FluidShape.prepare(FluidShape.describe(0, 0), width, height, preferences.field.feather, 0)
+    readonly property var samples: FluidShape.prepare(shapes, width, height, preferences.field.feather, fieldOffset, side)
+    readonly property var restingSamples: FluidShape.prepare(FluidShape.describe(0, 0), width, height, preferences.field.feather, 0, side)
     readonly property bool settling: liquid.running
 
     Component.onCompleted: {

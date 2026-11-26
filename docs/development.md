@@ -15,6 +15,13 @@ for that version. On Arch-based systems, install with
 `sudo pacman -S --needed quickshell` and verify with `qs --version`.
 Qt's formatter, linter and test runner may be under `/usr/lib/qt6/bin`.
 
+The current bar preview uses the same Quickshell/Niri environment. Run
+`scripts/check-qml.sh`, `tests/test-cli.sh`, `tests/test-package.sh`, and
+`tests/test-installed-runtime.sh` before review. The bar's remaining live
+acceptance checks are tracked in
+[`specs/002-configurable-dot-bar/tasks.md`](../specs/002-configurable-dot-bar/tasks.md);
+software-rendered captures do not replace Niri checks on each edge and scale.
+
 Install and verify Spec Kit:
 
 ```sh

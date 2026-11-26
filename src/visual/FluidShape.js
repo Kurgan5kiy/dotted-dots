@@ -17,15 +17,16 @@ function describe(phase, strength) {
             opacity: 0.14 * envelope}
     ];
 }
-function alphaAt(x, y, width, height, feather, offset, shapes, centerOpacity) {
-    return sample(prepare(shapes, width, height, feather, offset), x, y, centerOpacity);
+function alphaAt(x, y, width, height, feather, offset, shapes, centerOpacity, side) {
+    return sample(prepare(shapes, width, height, feather, offset, side), x, y, centerOpacity);
 }
 
 // Shared once per shape update instead of repeating geometry work per dot.
-function prepare(shapes, width, height, feather, offset) {
+function prepare(shapes, width, height, feather, offset, side) {
+    if (side === undefined) side = "right";
     var inner = Math.max(0.1, 1 - feather / Math.min(width, height / 2));
     return shapes.filter(function(shape) { return shape.opacity > 0; }).map(function(shape) {
-        return {cx: width + offset + shape.x, cy: height / 2 + shape.y,
+        return {cx: (side === "left" ? offset : width + offset) + shape.x, cy: height / 2 + shape.y,
             inverseX: 1 / (width * shape.sx), inverseY: 1 / (height / 2 * shape.sy),
             inner: inner, innerSquared: inner * inner, inverseFeather: 1 / (1 - inner),
             opacity: shape.opacity};
@@ -60,9 +61,12 @@ function transformed(shapes, x, y, scale) {
 
 // Keep each feathered ellipse inside the non-screen edges of the local surface.
 // Its center still follows the pointer; only an overflowing radius contracts.
-function contained(shapes, width, height, offset, inset) {
+function contained(shapes, width, height, offset, inset, side) {
+    if (side === undefined) side = "right";
     return shapes.map(function(shape) {
-        var horizontalLimit = (width + offset + shape.x - inset) / width;
+        var horizontalLimit = side === "left"
+            ? (width - offset - shape.x - inset) / width
+            : (width + offset + shape.x - inset) / width;
         var verticalLimit = (height / 2 - Math.abs(shape.y) - inset) / (height / 2);
         return {x: shape.x, y: shape.y,
             sx: Math.min(shape.sx, Math.max(0.01, horizontalLimit)),

@@ -81,5 +81,8 @@ eDEX-UI's sense of a responsive machine. It does not copy eDEX-UI's terminal
 dashboard, layout, or functionality. It does not copy Caelestia's visual
 language.
 
-It is not a permanently visible HUD, does not require one specific wallpaper,
-and does not trade basic usability for decorative animation.
+It is not a permanently visible dashboard and does not require one specific
+wallpaper. The user-requested bar can remain visible as a quiet edge surface;
+its feathered module areas overlap windows while reserving only the space
+needed for controls. The shell does not trade basic usability for decorative
+animation.

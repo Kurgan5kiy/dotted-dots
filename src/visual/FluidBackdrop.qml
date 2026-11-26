@@ -6,6 +6,7 @@ Item {
     required property real feather
     required property var shapes
     property real offset: 0
+    property string side: "right"
     property color fillColor: "#181818"
     property real centerOpacity: 1
     Repeater {
@@ -16,7 +17,7 @@ Item {
             readonly property var shape: root.shapes[index]
             width: root.width * 2
             height: root.height
-            x: root.offset + shape.x
+            x: root.offset + shape.x - (root.side === "left" ? root.width : 0)
             y: shape.y
             opacity: shape.opacity * root.centerOpacity
             transform: Scale {
