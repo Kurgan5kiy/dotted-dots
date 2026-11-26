@@ -192,7 +192,7 @@ TestCase {
         scene.field.light.leavePointer();
         scene.controller.phase = "retracting";
         scene.controller.interactive = false;
-        for (var frame = 0; frame <= 6; frame++) {
+        for (let frame = 0; frame <= 6; frame++) {
             if (frame > 0)
                 wait(100);
             grabImage(scene.fixture).save(Qt.resolvedUrl("../../dist/visual/pointer-retreat-" + frame + ".png").toString().replace(/^file:\/\//, ""));
@@ -275,9 +275,9 @@ TestCase {
         scene.field.light.trackPointer(data.px, data.py);
         wait(200);
         var image = grabImage(scene.fixture);
-        for (var y = 0; y < 540; y += 6)
+        for (let y = 0; y < 540; y += 6)
             verify(image.red(0, y) >= 254, "Dark field clipped at left edge, y=" + y);
-        for (var x = 0; x < 180; x += 6) {
+        for (let x = 0; x < 180; x += 6) {
             verify(image.red(x, 0) >= 254, "Dark field clipped at top edge, x=" + x);
             verify(image.red(x, 539) >= 254, "Dark field clipped at bottom edge, x=" + x);
         }
@@ -286,8 +286,8 @@ TestCase {
     function test_visualStates_data() {
         var rows = [];
         var backgrounds = ["bright", "dark", "colorful", "busy"];
-        for (var variant = 0; variant < backgrounds.length; variant++) {
-            for (var state of ["hover", "drag", "muted", "unavailable", "reduced"])
+        for (let variant = 0; variant < backgrounds.length; variant++) {
+            for (const state of ["hover", "drag", "muted", "unavailable", "reduced"])
                 rows.push({
                     tag: backgrounds[variant] + "-" + state,
                     variant: variant,

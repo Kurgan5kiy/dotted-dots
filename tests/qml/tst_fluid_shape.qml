@@ -33,12 +33,12 @@ TestCase {
         compare(shape[1].opacity, 0);
     }
     function test_followingShapesFadeBeforeSurfaceBoundary() {
-        for (var phase = 0; phase <= Math.PI * 6; phase += 0.4) {
-            var moved = FluidShape.transformed(FluidShape.describe(phase, 2), -48, -48, 1);
-            var shapes = FluidShape.contained(moved, 180, 540, 0, 2);
-            for (var y = 0; y <= 540; y += 18)
+        for (let phase = 0; phase <= Math.PI * 6; phase += 0.4) {
+            const moved = FluidShape.transformed(FluidShape.describe(phase, 2), -48, -48, 1);
+            const shapes = FluidShape.contained(moved, 180, 540, 0, 2);
+            for (let y = 0; y <= 540; y += 18)
                 compare(FluidShape.alphaAt(0, y, 180, 540, 96, 0, shapes, 1), 0);
-            for (var x = 0; x <= 180; x += 18) {
+            for (let x = 0; x <= 180; x += 18) {
                 compare(FluidShape.alphaAt(x, 0, 180, 540, 96, 0, shapes, 1), 0);
                 compare(FluidShape.alphaAt(x, 540, 180, 540, 96, 0, shapes, 1), 0);
             }
@@ -50,12 +50,12 @@ TestCase {
     function referenceAlpha(x, y, width, height, feather, offset, shapes, opacity) {
         var inner = Math.max(0.1, 1 - feather / Math.min(width, height / 2));
         var transparent = 1;
-        for (var i = 0; i < shapes.length; i++) {
-            var shape = shapes[i];
-            var dx = (x - offset - shape.x - width) / (width * shape.sx);
-            var dy = (y - shape.y - height / 2) / (height / 2 * shape.sy);
-            var radius = Math.sqrt(dx * dx + dy * dy);
-            var t = Math.max(0, Math.min(1, (radius - inner) / (1 - inner)));
+        for (let i = 0; i < shapes.length; i++) {
+            const shape = shapes[i];
+            const dx = (x - offset - shape.x - width) / (width * shape.sx);
+            const dy = (y - shape.y - height / 2) / (height / 2 * shape.sy);
+            const radius = Math.sqrt(dx * dx + dy * dy);
+            const t = Math.max(0, Math.min(1, (radius - inner) / (1 - inner)));
             transparent *= 1 - (1 - t * t * (3 - 2 * t)) * shape.opacity * opacity;
         }
         return 1 - transparent;
@@ -63,12 +63,12 @@ TestCase {
     function test_preparedSamplesMatchPreviousFormula() {
         var phases = [0, 2.5, 8.4, Math.PI * 6];
         var opacities = [0, 0.35, 1];
-        for (var phase of phases) {
-            var shapes = FluidShape.contained(FluidShape.transformed(FluidShape.describe(phase, 2), -36, 24, 0.8), 180, 540, 12, 2);
-            var samples = FluidShape.prepare(shapes, 180, 540, 96, 12);
-            for (var opacity of opacities) {
-                for (var x = 0; x <= 180; x += 9) {
-                    for (var y = 0; y <= 540; y += 18)
+        for (const phase of phases) {
+            const shapes = FluidShape.contained(FluidShape.transformed(FluidShape.describe(phase, 2), -36, 24, 0.8), 180, 540, 12, 2);
+            const samples = FluidShape.prepare(shapes, 180, 540, 96, 12);
+            for (const opacity of opacities) {
+                for (let x = 0; x <= 180; x += 9) {
+                    for (let y = 0; y <= 540; y += 18)
                         fuzzyCompare(FluidShape.sample(samples, x, y, opacity), referenceAlpha(x, y, 180, 540, 96, 12, shapes, opacity), 0.000000001);
                 }
             }

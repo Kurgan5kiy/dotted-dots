@@ -90,10 +90,10 @@ TestCase {
     }
     function test_logicalScaleSizes() {
         var scales = [1, 1.25, 1.5, 2];
-        for (var i = 0; i < scales.length; i++) {
-            var logicalWidth = 1920 / scales[i];
-            var logicalHeight = 1200 / scales[i];
-            var g = Routing.geometry(logicalWidth, logicalHeight, {
+        for (let i = 0; i < scales.length; i++) {
+            const logicalWidth = 1920 / scales[i];
+            const logicalHeight = 1200 / scales[i];
+            const g = Routing.geometry(logicalWidth, logicalHeight, {
                 width: 180,
                 height: 540,
                 spacing: 18
